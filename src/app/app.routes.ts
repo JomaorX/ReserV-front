@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './guards/auth.guard';
 import { ReservationComponent } from './pages/reservation/reservation.component';
+import { MyReservationsComponent } from './pages/my-reservations/my-reservations.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent }, // Página de inicio
@@ -16,6 +17,10 @@ export const routes: Routes = [
     },
     { path: 'reservation',
         component: ReservationComponent,
+        canActivate: [authGuard], // Proteger la ruta con AuthGuard
+    },
+    { path: 'myreservation',
+        component: MyReservationsComponent,
         canActivate: [authGuard], // Proteger la ruta con AuthGuard
     },
 ];
