@@ -1,45 +1,28 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { jwtDecode, JwtPayload } from 'jwt-decode'; // Importa jwtDecode y JwtPayload
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api'; // URL del backend
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  // Método para iniciar sesión
   login(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/login`, { email, password }).subscribe({
-      next: (response: any) => {
-        // Guardar el token en localStorage
-        localStorage.setItem('token', response.token);
-        // Redirigir al dashboard
-        this.router.navigate(['/dashboard']);
-      },
-      error: (error: any) => {
-        console.error('Error en el inicio de sesión:', error);
-        alert('Credenciales incorrectas. Inténtalo de nuevo.');
-      },
-    });
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
   }
 
-  register(name: string, email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/register`, { name, email, password }).subscribe({
-      next: () => {
-        alert('Registro exitoso. Por favor, inicia sesión.');
-        this.router.navigate(['/login']);
-      },
-      error: (error: any) => {
-        console.error('Error en el registro:', error);
-        alert('Error al registrar. Inténtalo de nuevo.');
-      },
-    });
+  // Método para registrar un nuevo usuario
+  register(name: string, email: string, password: string, role: string) {
+    return this.http.post(`${this.apiUrl}/register`, { name, email, password, role });
   }
 
   // Obtener el token desde localStorage
-  getToken() {
+  getToken(): string | null {
     return localStorage.getItem('token');
   }
 
@@ -47,6 +30,21 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = this.getToken();
     return !!token; // Retorna true si hay un token, false si no
+  }
+
+  // Decodificar el token JWT para obtener los datos del usuario
+  getUserData(): JwtPayload | null {
+    const token = this.getToken();
+    if (token) {
+      try {
+        const decodedToken = jwtDecode<JwtPayload>(token); // Decodificar el payload del token
+        return decodedToken;
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+        return null;
+      }
+    }
+    return null;
   }
 
   // Cerrar sesión

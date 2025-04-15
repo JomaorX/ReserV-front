@@ -1,75 +1,52 @@
-<div class="flex items-center justify-center min-h-screen bg-gray-100">
-  <div class="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold text-center">Registro</h2>
-    <form class="space-y-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <!-- Campo de Nombre -->
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-        <input
-          type="text"
-          id="name"
-          formControlName="name"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        @if (name.invalid && (name.dirty || name.touched)) {
-          <div class="text-red-500 text-sm">
-            @if (name.errors?.['required']) {
-              <span>El nombre es obligatorio.</span>
-            }
-          </div>
-        }
-      </div>
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+  <h1 class="text-2xl font-bold text-center mb-6">Registro</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Nombre -->
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+      <input id="name" formControlName="name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      @if (registerForm.get('name')?.invalid && (registerForm.get('name')?.touched || registerForm.get('name')?.dirty)) {
+        <p class="text-red-500 text-sm mt-1">El nombre es obligatorio.</p>
+      }
+    </div>
 
-      <!-- Campo de Correo Electrónico -->
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        @if (email.invalid && (email.dirty || email.touched)) {
-          <div class="text-red-500 text-sm">
-            @if (email.errors?.['required']) {
-              <span>El correo electrónico es obligatorio.</span>
-            }
-            @if (email.errors?.['email']) {
-              <span>El correo electrónico no es válido.</span>
-            }
-          </div>
-        }
-      </div>
+    <!-- Correo Electrónico -->
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico:</label>
+      <input id="email" formControlName="email" type="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      @if (registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)) {
+        <p class="text-red-500 text-sm mt-1">El correo electrónico es obligatorio y debe ser válido.</p>
+      }
+    </div>
 
-      <!-- Campo de Contraseña -->
-      <div>
-        <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          formControlName="password"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-        @if (password.invalid && (password.dirty || password.touched)) {
-          <div class="text-red-500 text-sm">
-            @if (password.errors?.['required']) {
-              <span>La contraseña es obligatoria.</span>
-            }
-            @if (password.errors?.['minlength']) {
-              <span>La contraseña debe tener al menos 6 caracteres.</span>
-            }
-          </div>
-        }
-      </div>
+    <!-- Contraseña -->
+    <div>
+      <label for="password" class="block text-sm font-medium text-gray-700">Contraseña:</label>
+      <input id="password" formControlName="password" type="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      @if (registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)) {
+        <p class="text-red-500 text-sm mt-1">La contraseña es obligatoria y debe tener al menos 6 caracteres.</p>
+      }
+    </div>
 
-      <!-- Botón de Envío -->
-      <button
-        type="submit"
-        [disabled]="registerForm.invalid"
-        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        Registrarse
-      </button>
-    </form>
-  </div>
+    <!-- Rol -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Rol:</label>
+      <div class="mt-1 space-x-4">
+        <label>
+          <input type="radio" formControlName="role" value="client" class="mr-2"> Cliente
+        </label>
+        <label>
+          <input type="radio" formControlName="role" value="admin" class="mr-2"> Empresa
+        </label>
+      </div>
+      @if (registerForm.get('role')?.invalid && (registerForm.get('role')?.touched || registerForm.get('role')?.dirty)) {
+        <p class="text-red-500 text-sm mt-1">Debes seleccionar un rol.</p>
+      }
+    </div>
+
+    <!-- Botón de envío -->
+    <button type="submit" [disabled]="registerForm.invalid" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      Registrarse
+    </button>
+  </form>
 </div>

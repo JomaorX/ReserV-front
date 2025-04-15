@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
   password: FormControl;
   errorMessage: string = ''; // Para mostrar mensajes de error del backend
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
@@ -28,8 +29,19 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
 
-      // Llamada al backend usando AuthService
-      this.authService.login(email, password); // ✅ Solo llamamos a .subscribe() dentro del servicio
+      this.authService.login(email, password).subscribe({
+        next: (response: any) => {
+          // Guardar el token en localStorage
+          localStorage.setItem('token', response.token);
+
+          // Redirigir al dashboard
+          this.router.navigate(['/dashboard']);
+        },
+        error: (error) => {
+          console.error('Error en el inicio de sesión:', error);
+          alert('Credenciales incorrectas. Inténtalo de nuevo.');
+        },
+      });
     } else {
       console.log('Formulario inválido');
     }
