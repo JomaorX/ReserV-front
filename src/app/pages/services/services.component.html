@@ -1,0 +1,50 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-center mb-6">Gestión de Servicios</h1>
+  
+    <!-- Formulario para agregar un servicio -->
+    <form [formGroup]="serviceForm" (ngSubmit)="addService()" class="space-y-4">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+        <input id="name" formControlName="name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (serviceForm.get('name')?.invalid && (serviceForm.get('name')?.touched || serviceForm.get('name')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">El nombre es obligatorio.</p>
+        }
+      </div>
+      <div>
+        <label for="description" class="block text-sm font-medium text-gray-700">Descripción:</label>
+        <input id="description" formControlName="description" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <div>
+        <label for="price" class="block text-sm font-medium text-gray-700">Precio:</label>
+        <input id="price" formControlName="price" type="number" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (serviceForm.get('price')?.invalid && (serviceForm.get('price')?.touched || serviceForm.get('price')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">El precio es obligatorio y debe ser mayor o igual a 0.</p>
+        }
+      </div>
+      <div>
+        <label for="duration" class="block text-sm font-medium text-gray-700">Duración (minutos):</label>
+        <input id="duration" formControlName="duration" type="number" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (serviceForm.get('duration')?.invalid && (serviceForm.get('duration')?.touched || serviceForm.get('duration')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">La duración es obligatoria y debe ser mayor o igual a 0.</p>
+        }
+      </div>
+      <button type="submit" [disabled]="serviceForm.invalid" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Agregar Servicio
+      </button>
+    </form>
+  
+    <!-- Lista de servicios -->
+    <ul class="mt-6 space-y-4">
+      @for (service of services; track service) {
+        <li class="p-4 border border-gray-300 rounded-md">
+          <p><strong>Nombre:</strong> {{ service.name }}</p>
+          <p><strong>Descripción:</strong> {{ service.description }}</p>
+          <p><strong>Precio:</strong> {{ service.price }} €</p>
+          <p><strong>Duración:</strong> {{ service.duration }} minutos</p>
+          <button (click)="deleteService(service.id)" class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Eliminar
+          </button>
+        </li>
+      }
+    </ul>
+  </div>

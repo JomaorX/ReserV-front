@@ -33,10 +33,17 @@ export class LoginComponent {
         next: (response: any) => {
           // Guardar el token en localStorage
           localStorage.setItem('token', response.token);
+          // Obtener datos del usuario desde el token
 
-          // Redirigir al dashboard
+        const userData: any = this.authService.getUserData();
+
+            // Redirigir según el rol
+        if (userData && userData.role === 'admin') {
+          this.router.navigate(['/admin-dashboard']);
+        } else {
           this.router.navigate(['/dashboard']);
-        },
+        }
+      },
         error: (error) => {
           console.error('Error en el inicio de sesión:', error);
           alert('Credenciales incorrectas. Inténtalo de nuevo.');

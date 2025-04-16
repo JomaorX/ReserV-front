@@ -1,0 +1,36 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-center mb-6">Mi Peluquería</h1>
+    <form [formGroup]="salonForm" (ngSubmit)="saveSalon()" class="space-y-4">
+      <!-- Nombre del salón -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+        <input id="name" formControlName="name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (salonForm.get('name')?.invalid && (salonForm.get('name')?.touched || salonForm.get('name')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">El nombre es obligatorio.</p>
+        }
+      </div>
+  
+      <!-- Ubicación -->
+      <div>
+        <label for="location" class="block text-sm font-medium text-gray-700">Ubicación:</label>
+        <input id="location" formControlName="location" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (salonForm.get('location')?.invalid && (salonForm.get('location')?.touched || salonForm.get('location')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">La ubicación es obligatoria.</p>
+        }
+      </div>
+  
+      <!-- Horario de apertura -->
+      <div>
+        <label for="openingHours" class="block text-sm font-medium text-gray-700">Horario de Apertura:</label>
+        <input id="openingHours" formControlName="openingHours" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (salonForm.get('openingHours')?.invalid && (salonForm.get('openingHours')?.touched || salonForm.get('openingHours')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">El horario es obligatorio.</p>
+        }
+      </div>
+  
+      <!-- Botón de envío -->
+      <button type="submit" [disabled]="salonForm.invalid" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Guardar
+      </button>
+    </form>
+  </div>
