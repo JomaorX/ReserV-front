@@ -1,77 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { jwtDecode } from 'jwt-decode'; // Importa jwtDecode para decodificar el token
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
   private apiUrl = 'http://localhost:3000/api/reservations'; // URL del backend
+  private headers: HttpHeaders; // Configura el encabezado Authorization con el token
 
-  constructor(private http: HttpClient) {}
-  
+  constructor(private http: HttpClient, private authService: AuthService) {
+        this.headers = this.authService.getAuth();
+      }
 
   // Crear una nueva reserva
   createReservation(reservationData: any) {
-    const token = localStorage.getItem('token'); // Obtén el token del usuario autenticado
-
-    if (!token) {
-      console.error('Token no encontrado en localStorage.');
-      throw new Error('Token no encontrado. Inicia sesión nuevamente.');
-    }
-
-    // Configura el encabezado Authorization con el token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
-    });
-
-    return this.http.post(this.apiUrl, reservationData, { headers });
+    return this.http.post(this.apiUrl, reservationData, {headers: this.headers});
   }
 
   // Obtener todas las reservas del usuario autenticado
   getReservations() {
-    const token = localStorage.getItem('token'); // Obtén el token del usuario autenticado
-
-    if (!token) {
-      console.error('Token no encontrado en localStorage.');
-      throw new Error('Token no encontrado. Inicia sesión nuevamente.');
-    }
-    // Configura el encabezado Authorization con el token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
-    });
-    return this.http.get<any[]>(this.apiUrl, { headers });
+    return this.http.get<any[]>(this.apiUrl, {headers: this.headers});
   }
 
   // Actualizar una reserva existente
   updateReservation(id: number, updatedData: any) {
-
-    const token = localStorage.getItem('token'); // Obtén el token del usuario autenticado
-
-    if (!token) {
-      console.error('Token no encontrado en localStorage.');
-      throw new Error('Token no encontrado. Inicia sesión nuevamente.');
-    }
-    // Configura el encabezado Authorization con el token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
-    });
-    return this.http.put(`${this.apiUrl}/${id}`, updatedData, { headers });
+    return this.http.put(`${this.apiUrl}/${id}`, updatedData, {headers: this.headers});
   }
 
   // Eliminar una reserva
   deleteReservation(id: number) {
-
-    const token = localStorage.getItem('token'); // Obtén el token del usuario autenticado
-
-    if (!token) {
-      console.error('Token no encontrado en localStorage.');
-      throw new Error('Token no encontrado. Inicia sesión nuevamente.');
-    }
-    // Configura el encabezado Authorization con el token
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
-    });
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+    return this.http.delete(`${this.apiUrl}/${id}`, {headers: this.headers});
   }
 }

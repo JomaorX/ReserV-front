@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode, JwtPayload } from 'jwt-decode'; // Importa jwtDecode y JwtPayload
 
@@ -45,6 +45,17 @@ export class AuthService {
       }
     }
     return null;
+  }
+
+  getAuth(): HttpHeaders{
+    const token = this.getToken(); // Obtén el token del usuario autenticado
+
+    // Configura el encabezado Authorization con el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+    });
+
+    return headers;
   }
 
   // Cerrar sesión

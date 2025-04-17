@@ -16,7 +16,7 @@
         }
 
         <!-- Mostrar botones si el usuario está autenticado -->
-        @if (authService.isAuthenticated()) {
+        @if (authService.isAuthenticated() && userData) {
           @if (userData.role === 'client') {
             <!-- Botones para clientes -->
             <li><a routerLink="/dashboard" class="hover:underline">Dashboard</a></li>

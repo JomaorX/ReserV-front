@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ReservationService } from '../../services/reservation.service';
+import { SalonService } from '../../services/salon.service';
+import { EmployeeService } from '../../services/employee.service';
+import { ServiceService } from '../../services/service.service';
 
 @Component({
   selector: 'app-reservation',
@@ -9,50 +12,84 @@ import { ReservationService } from '../../services/reservation.service';
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.scss'],
 })
-export class ReservationComponent {
+export class ReservationComponent implements OnInit {
   reservationForm: FormGroup;
-  barber: FormControl;
-  service: FormControl;
-  date: FormControl;
-  time: FormControl;
-  salonId: FormControl;
+  barbers: any[] = [];
+  services: any[] = [];
+  salons: any[] = [];
 
-  // Simulación de datos del backend (peluqueros, servicios y salones)
-  barbers = ['Juan', 'María', 'Carlos'];
-  services = ['Corte de cabello', 'Tinte', 'Peinado', 'Tratamiento capilar'];
-  salons = [
-    { id: 1, name: 'Salón Central' },
-    { id: 2, name: 'Salón Norte' },
-    { id: 3, name: 'Salón Sur' },
-  ];
-
-  constructor(private reservationService: ReservationService) {
-    this.barber = new FormControl('', [Validators.required]);
-    this.service = new FormControl('', [Validators.required]);
-    this.date = new FormControl('', [Validators.required]);
-    this.time = new FormControl('', [Validators.required]);
-    this.salonId = new FormControl('', [Validators.required]);
-
+  constructor(
+    private reservationService: ReservationService,
+    private salonService: SalonService,
+    private employeeService: EmployeeService,
+    private serviceService: ServiceService
+  ) {
     this.reservationForm = new FormGroup({
-      salonId: this.salonId,
-      barber: this.barber,
-      service: this.service,
-      date: this.date,
-      time: this.time,
+      salonId: new FormControl('', [Validators.required]),
+      barber: new FormControl('', [Validators.required]),
+      service: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      time: new FormControl('', [Validators.required]),
     });
   }
 
-  onSubmit() {
+  ngOnInit(): void {
+    this.loadSalons();
+    this.loadBarbers();
+    this.loadServices();
+  }
+
+  // Cargar salones desde el backend
+  loadSalons(): void {
+    this.salonService.getSalons().subscribe({
+      next: (data) => {
+        this.salons = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar los salones:', error);
+        alert('Error al cargar los salones.');
+      },
+    });
+  }
+
+  // Cargar peluqueros (empleados) desde el backend
+  loadBarbers(): void {
+    this.employeeService.getEmployees().subscribe({
+      next: (data) => {
+        this.barbers = data.map((employee) => employee.name); // Extraer solo los nombres
+      },
+      error: (error) => {
+        console.error('Error al cargar los peluqueros:', error);
+        alert('Error al cargar los peluqueros.');
+      },
+    });
+  }
+
+  // Cargar servicios desde el backend
+  loadServices(): void {
+    this.serviceService.getServices().subscribe({
+      next: (data) => {
+        this.services = data.map((service) => service.name); // Extraer solo los nombres
+      },
+      error: (error) => {
+        console.error('Error al cargar los servicios:', error);
+        alert('Error al cargar los servicios.');
+      },
+    });
+  }
+
+  onSubmit(): void {
     if (this.reservationForm.valid) {
       const reservationData = this.reservationForm.value;
-      reservationData.salonId = parseInt(reservationData.salonId);
+      reservationData.salonId = parseInt(reservationData.salonId); // Asegurarse de que sea un número
+
       // Crear la reserva usando el servicio
       this.reservationService.createReservation(reservationData).subscribe({
         next: () => {
           alert('Reserva realizada con éxito.');
           this.reservationForm.reset(); // Limpiar el formulario
         },
-        error: (error: any) => {
+        error: (error) => {
           console.error('Error al crear la reserva:', error);
           alert('Ocurrió un error al realizar la reserva. Inténtalo de nuevo.');
         },
