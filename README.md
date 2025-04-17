@@ -1,5 +1,13 @@
 # ReserV-front
 
+---
+
+<p align="center">
+https://raw.githubusercontent.com/JomaorX/ReserV-front/refs/heads/main/public/reserV-LogoM%20-%20mediano.png
+</p>
+
+---
+
 Frontend de **ReserV**, una plataforma de reservas para peluquerías, desarrollada con **Angular** y **Tailwind CSS**.
 
 ---
