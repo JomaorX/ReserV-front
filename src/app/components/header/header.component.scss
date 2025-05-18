@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(#051f30, #000000);
+    font-family: 'Calibri', sans-serif;
+    
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #ffffff12;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    transition: height 0.3s;
+    box-shadow: 0px 8px 9px 0px #00000014;
+    padding: 0 20px;
+    z-index: 999;
+    justify-content: center;
+}
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.menu-content li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    transition: background 0.3s;
+    padding: 10px 15px;
+}
+
+.menu-content li:hover {
+    background: #0c0c0c;
+}
+
+.menu-content li span:nth-child(2) {
+    display: none;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.menu:hover li span:nth-child(2) {
+    display: inline;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(213, 213, 213);
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.material-symbols-outlined {
+    padding: 8px;
+    font-size: 22px;
+    border-radius: 50%;
+    background: #0c0c0c;
+}

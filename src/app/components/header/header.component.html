@@ -1,35 +1,71 @@
-<header class="bg-indigo-600 text-white py-4">
+<header>
   <div class="container mx-auto flex justify-between items-center px-4">
-    <!-- Logo -->
-    <h1 class="text-2xl font-bold">
-      <img src="reserV-Logo-p.png" alt="ReserV Logo" class="h-10">
-    </h1>
 
     <!-- Navegación -->
-    <nav>
-      <ul class="flex space-x-4">       
-        <!-- Mostrar botones si el usuario NO está autenticado -->
-        @if (!authService.isAuthenticated()) {
-          <li><a routerLink="/" class="hover:underline">Inicio</a></li>
-          <li><a routerLink="/login" class="hover:underline">Iniciar Sesión</a></li>
-          <li><a routerLink="/register" class="hover:underline">Registro</a></li>
-        }
+    <div class="menu">
+      <nav>
+        <ul class="menu-content">
+          <!-- Mostrar botones si el usuario NO está autenticado -->
+          @if (!authService.isAuthenticated()) {
+            <li>
+              <a href="/" class="flex items-center text-white hover:text-gray-300 focus:outline-none">
+                <span class="material-symbols-outlined">home</span>
+                <span class="ml-2">Inicio</span>
+              </a>
+            </li>
+            <li>
+              <a href="/login" class="flex items-center text-white hover:text-gray-300 focus:outline-none">
+                <span class="material-symbols-outlined">person</span>
+                <span class="ml-2">Iniciar Sesión</span>
+              </a>
+            </li>
+            <li>
+              <a href="/register" class="flex items-center text-white hover:text-gray-300 focus:outline-none">
+                <span class="material-symbols-outlined">lock_open</span>
+                <span class="ml-2">Registro</span>
+              </a>
+            </li>
+          }
 
-        <!-- Mostrar botones si el usuario está autenticado -->
-        @if (authService.isAuthenticated() && userData) {
-          @if (userData.role === 'client') {
-            <!-- Botones para clientes -->
-            <li><a routerLink="/dashboard" class="hover:underline">Dashboard</a></li>
-            <li><a routerLink="/reservation" class="hover:underline">Solicitar Cita</a></li>
-            <li><a routerLink="/my-reservations" class="hover:underline">Mis Citas</a></li>
+          <!-- Mostrar botones si el usuario está autenticado -->
+          @if (authService.isAuthenticated() && userData) {
+            @if (userData.role === 'client') {
+              <li>
+                <a href="/dashboard" class="flex items-center text-white hover:text-gray-300 focus:outline-none">
+                  <span class="material-symbols-outlined">dashboard</span>
+                  <span class="ml-2">Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="/reservation" class="flex items-center text-white hover:text-gray-300 focus:outline-none">
+                  <span class="material-symbols-outlined">calendar_month</span>
+                  <span class="ml-2">Solicitar Cita</span>
+                </a>
+              </li>
+              <li>
+                <a href="/my-reservations" class="flex items-center text-white hover:text-gray-300 focus:outline-none">
+                  <span class="material-symbols-outlined">book_online</span>
+                  <span class="ml-2">Mis Reservas</span>
+                </a>
+              </li>
+            }
+            @if (userData.role === 'admin') {
+              <li>
+                <a href="/admin-dashboard" class="flex items-center text-white hover:text-gray-300 focus:outline-none">
+                  <span class="material-symbols-outlined">settings</span>
+                  <span class="ml-2">Panel de Control</span>
+                </a>
+              </li>
+            }
+            <li>
+              <button (click)="logout()" class="flex items-center text-white hover:text-gray-300 focus:outline-none focus:ring-0 border-none bg-transparent">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="ml-2">Cerrar Sesión</span>
+              </button>
+            </li>
           }
-          @if (userData.role === 'admin') {
-            <!-- Botones para administradores -->
-            <li><a routerLink="/admin-dashboard" class="hover:underline">Panel de Control</a></li>
-          }
-          <li><button (click)="logout()" class="hover:underline">Cerrar Sesión</button></li>
-        }
-      </ul>
-    </nav>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
