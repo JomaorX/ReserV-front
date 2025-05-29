@@ -1,0 +1,221 @@
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Calibri', sans-serif;
+  background-image: url('/fnd2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.salon-detail-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem 2rem; /* 👈 sin espacio arriba */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Calendario estilo tarjetas */
+.calendar-wrapper {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.day-card {
+  background-color: #0d0d0d;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.day-card:hover {
+  transform: translateY(-4px);
+}
+
+.date-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.hours-list button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 0.4rem 0;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.hours-list button:hover {
+  background-color: #e5e5e5;
+}
+
+.hours-list button.reservado {
+  background-color: #999;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* Banner actualizado a full width y más alto */
+.salon-banner {
+  width: 100vw;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.salon-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.6);
+}
+
+.salon-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+}
+
+.salon-name {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+/* Info debajo del banner */
+.salon-info {
+  text-align: center;
+  margin-top: -40px;
+  z-index: 2;
+  position: relative;
+}
+
+.salon-info h1 {
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+.salon-info p {
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+/* Formulario */
+.cita-form {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.cita-form h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.cita-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #eee;
+}
+
+.cita-form input,
+.cita-form select,
+.cita-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.4rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.cita-form input::placeholder,
+.cita-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cita-form input:focus,
+.cita-form select:focus,
+.cita-form textarea:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.cita-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.cita-form button {
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  background-color: #4a67f2;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cita-form button:hover {
+  background-color: #3d54cc;
+}
+
+.cita-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

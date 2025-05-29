@@ -1,0 +1,52 @@
+<div class="service-container">
+  <h1>Gestión de Servicios</h1>
+
+  <form [formGroup]="serviceForm" (ngSubmit)="addService()">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input id="name" formControlName="name" type="text" />
+      @if (serviceForm.get('name')?.invalid && (serviceForm.get('name')?.touched || serviceForm.get('name')?.dirty)) {
+        <p class="error">El nombre es obligatorio.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descripción:</label>
+      <input id="description" formControlName="description" type="text" />
+    </div>
+
+    <div class="form-group">
+      <label for="price">Precio:</label>
+      <input id="price" formControlName="price" type="number" />
+      @if (serviceForm.get('price')?.invalid && (serviceForm.get('price')?.touched || serviceForm.get('price')?.dirty)) {
+        <p class="error">El precio es obligatorio y debe ser mayor o igual a 0.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Duración (minutos):</label>
+      <input id="duration" formControlName="duration" type="number" />
+      @if (serviceForm.get('duration')?.invalid && (serviceForm.get('duration')?.touched || serviceForm.get('duration')?.dirty)) {
+        <p class="error">La duración es obligatoria y debe ser mayor o igual a 0.</p>
+      }
+    </div>
+
+    <button type="submit" [disabled]="serviceForm.invalid" class="submit-btn">
+      Agregar Servicio
+    </button>
+  </form>
+
+  <ul class="service-list">
+    @for (service of services; track service) {
+      <li class="service-item">
+        <p><strong>Nombre:</strong> {{ service.name }}</p>
+        <p><strong>Descripción:</strong> {{ service.description }}</p>
+        <p><strong>Precio:</strong> {{ service.price }} €</p>
+        <p><strong>Duración:</strong> {{ service.duration }} minutos</p>
+        <button (click)="deleteService(service.id)" class="delete-btn">
+          Eliminar
+        </button>
+      </li>
+    }
+  </ul>
+</div>

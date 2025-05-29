@@ -1,0 +1,58 @@
+<body>
+  <div class="salon-detail-wrapper" *ngIf="salon">
+    <!-- Banner superior -->
+    <div class="salon-banner">
+      <img [src]="salon.bannerUrl || '/assets/default-banner.jpg'" alt="Banner del salón" />
+     <h1 class="salon-name">{{ salon.name }}</h1>
+
+    
+    </div>
+
+    <!-- Información del salón -->
+   
+
+    <!-- Formulario de cita -->
+    <div class="cita-form">
+      <p><strong>Horario de apertura:</strong> {{ salon.openingHours }}</p>
+      <h2>Solicitar Cita</h2>
+
+      <label for="fecha">Fecha:</label>
+      <input id="fecha" type="date" [(ngModel)]="fechaSeleccionada" />
+
+      <label for="peluquero">Peluquero:</label>
+      <select id="peluquero" [(ngModel)]="peluqueroSeleccionado">
+        <option *ngFor="let peluquero of peluqueros" [value]="peluquero">{{ peluquero }}</option>
+      </select>
+
+      <label for="detalle">Detalles:</label>
+      <textarea
+        id="detalle"
+        rows="3"
+        [(ngModel)]="detalleCita"
+        placeholder="Corte, tinte, barba..."
+      ></textarea>
+
+      <button (click)="solicitarCita()">Confirmar Cita</button>
+    </div>
+
+    <!-- Calendario visual con días -->
+    <div class="calendar-wrapper">
+      <div class="day-card" *ngFor="let dia of calendario">
+        <div class="date-circle">
+          <div>{{ dia.dia }}</div>
+          <div>{{ dia.mes }}</div>
+        </div>
+        <div class="hours-list">
+          <button
+            *ngFor="let hora of dia.horas"
+            [class.reservado]="hora.reservado"
+            [disabled]="hora.reservado"
+            (click)="seleccionarHora(dia, hora)"
+          >
+            {{ hora.hora }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

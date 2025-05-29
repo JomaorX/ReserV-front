@@ -1,0 +1,10 @@
+<!-- Loader Global (SIEMPRE visible al cambiar de ruta) -->
+<div *ngIf="loading" class="loader-wrapper">
+  <div class="spinner"></div>
+</div>
+
+<!-- Header solo si NO es login o register -->
+<app-header *ngIf="!esLoginPage"></app-header>
+
+<!-- Contenido de las rutas -->
+<router-outlet></router-outlet>

@@ -1,0 +1,26 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-center mb-6">Mis Citas</h1>
+  
+    @if (reservations.length > 0) {
+      <div class="space-y-4">
+        @for (reservation of reservations; track reservation.id) {
+          <div class="p-4 border rounded-lg">
+            <p><strong>Peluquero:</strong> {{ reservation.barber }}</p>
+            <p><strong>Servicio:</strong> {{ reservation.service }}</p>
+            <p><strong>Fecha:</strong> {{ reservation.date }}</p>
+            <p><strong>Hora:</strong> {{ reservation.time }}</p>
+            <div class="flex space-x-2 mt-2">
+              <button (click)="updateReservation(reservation.id, { barber: 'Nuevo Peluquero', service: 'Nuevo Servicio', date: '2023-12-01', time: '14:00' })" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                Modificar
+              </button>
+              <button (click)="deleteReservation(reservation.id)" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <p>No tienes citas activas.</p>
+    }
+  </div>
