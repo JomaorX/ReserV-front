@@ -1,7 +1,7 @@
 # 🛸 ReserV-front
 
 <p align="center">
-<img src="i.imgur.com/7FFRjqP.png" alt="ReserV logo">
+<img src="https://i.imgur.com/jONsYSn.png" alt="ReserV logo">
 </p>
 
 ---
