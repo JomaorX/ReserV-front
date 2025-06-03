@@ -1,0 +1,112 @@
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="salon-detail-wrapper" *ngIf="salon">
+    <!-- Banner superior -->
+    <div class="salon-banner">
+      <img [src]="salon.bannerUrl || '/assets/default-banner.jpg'" alt="Banner del salón" />
+      <h1 class="salon-name">{{ salon.name }}</h1>
+    </div>
+
+    <!-- Formulario de cita -->
+    <div class="cita-form">
+      <p><strong>Horario de apertura:</strong> {{ salon.openingHours }}</p>
+      <h2>Solicitar Cita</h2>
+
+      <!-- Calendario compacto -->
+      <div class="calendar-wrapper">
+        <div
+          *ngFor="let dia of calendario; let i = index"
+          class="day-card"
+          [class.selected]="diaSeleccionado?.dia === dia.dia && diaSeleccionado?.mes === dia.mes"
+        >
+          <div class="day-name">{{ dia.diaSemana || 'Día' }}</div>
+          <div class="day-month">{{ dia.mes }}</div>
+          <div class="day-number">{{ dia.dia }}</div>
+          <div class="day-hour">
+            {{ horaSeleccionada?.hora && diaSeleccionado?.dia === dia.dia ? horaSeleccionada.hora : 'Selecciona hora' }}
+          </div>
+
+          <!-- Flechita para desplegar -->
+          <span class="dropdown-arrow" (click)="seleccionarDia(i)">
+            <span class="material-symbols-outlined">expand_more</span>
+          </span>
+
+          <!-- Dropdown de horas scrollable -->
+          <div *ngIf="tarjetaExpandidaIndex === i" class="hour-dropdown">
+            <div
+              *ngFor="let hora of dia.horas"
+              class="hour-option"
+              [class.reservado]="hora.reservado"
+              (click)="seleccionarHora(dia, hora)"
+            >
+              {{ hora.hora }} <span *ngIf="hora.reservado">(Reservado)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta para abrir modal extendido -->
+        <div class="day-card day-card-extra" (click)="abrirSelectorFechaCompleto()">
+          <img src="/icon.gif" alt="Calendario animado" class="calendar-icon" />
+          <div class="day-hour">Seleccionar fecha y hora</div>
+        </div>
+      </div>
+
+      <!-- Selector peluquero -->
+      <label for="peluquero">Peluquero:</label>
+      <select id="peluquero" [(ngModel)]="peluqueroSeleccionado" class="w-full p-2 rounded border mt-2 mb-4">
+        <option *ngFor="let peluquero of peluqueros" [value]="peluquero">{{ peluquero }}</option>
+      </select>
+
+      <!-- Detalles -->
+      <label for="detalle">Detalles:</label>
+      <textarea
+        id="detalle"
+        rows="3"
+        [(ngModel)]="detalleCita"
+        placeholder="Corte, tinte, barba..."
+        class="w-full p-2 rounded border"
+      ></textarea>
+
+      <!-- Botón de confirmación -->
+      <button
+        (click)="solicitarCita()"
+        class="mt-4 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+      >
+        Confirmar Cita
+      </button>
+    </div>
+
+    <!-- MODAL CALENDARIO EXTENDIDO -->
+    <div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarCalendarioExtendido()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h3 class="modal-title">Selecciona una fecha</h3>
+        <div class="calendar-wrapper modal-calendar">
+          <div
+            *ngFor="let dia of fechasExtendidas"
+            (click)="seleccionarHora(dia, dia.horas[0]); cerrarCalendarioExtendido()"
+            class="day-card"
+            [class.selected]="diaSeleccionado?.dia === dia.dia && diaSeleccionado?.mes === dia.mes"
+          >
+            <div class="day-name">{{ dia.diaSemana || 'Día' }}</div>
+            <div class="day-month">{{ dia.mes }}</div>
+            <div class="day-number">{{ dia.dia }}</div>
+            <div class="day-hour">{{ dia.horas[0]?.hora || 'Sin hora' }}</div>
+          </div>
+        </div>
+        <button class="close-btn" (click)="cerrarCalendarioExtendido()">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- MODAL FECHA Y HORA PERSONALIZADA -->
+    <div class="modal-overlay" *ngIf="modalFechaHoraAbierto" (click)="cerrarSelectorFechaCompleto()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h3 class="modal-title">Selecciona fecha y hora</h3>
+        <input type="datetime-local" [(ngModel)]="fechaYHoraCompleta" class="calendar-datetime" />
+        <button class="close-btn" (click)="confirmarFechaHora()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</body>

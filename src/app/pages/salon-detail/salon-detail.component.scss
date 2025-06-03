@@ -1,0 +1,331 @@
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Calibri', sans-serif;
+  background-image: url('/fnd2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.salon-detail-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.salon-banner {
+  width: 100vw;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.salon-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.6);
+}
+
+.salon-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+}
+
+.salon-name {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+.salon-info {
+  text-align: center;
+  margin-top: -40px;
+  z-index: 2;
+  position: relative;
+}
+
+.salon-info h1 {
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+.salon-info p {
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+.cita-form {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.cita-form h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.cita-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #eee;
+}
+
+.cita-form input,
+.cita-form select,
+.cita-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.4rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.cita-form input::placeholder,
+.cita-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cita-form input:focus,
+.cita-form select:focus,
+.cita-form textarea:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.cita-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.cita-form button {
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  background-color: #4a67f2;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cita-form button:hover {
+  background-color: #3d54cc;
+}
+
+.cita-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* CALENDARIO */
+
+.calendar-wrapper {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  width: 100%;
+  scroll-behavior: smooth;
+  justify-content: center;
+}
+
+.day-card {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1rem;
+  min-width: 120px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.day-card:hover {
+  border-color: #4a67f2;
+  transform: translateY(-3px);
+}
+
+.day-card.selected {
+  border-color: #4a67f2;
+  box-shadow: 0 0 12px rgba(74, 103, 242, 0.5);
+}
+
+.day-name {
+  font-weight: bold;
+}
+
+.day-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a67f2;
+}
+
+.day-month {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.day-hour {
+  font-size: 0.95rem;
+  color: #eee;
+  margin-top: 0.5rem;
+}
+
+.dropdown-arrow {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.hour-dropdown {
+  margin-top: 0.8rem;
+  max-height: 100px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.hour-option {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+}
+
+.hour-option:hover {
+  background: #4a67f2;
+}
+
+.hour-option.reservado {
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+.day-card-extra {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px dashed #ab9eff;
+  color: #ab9eff;
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  min-width: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.day-card-extra:hover {
+  background: rgba(171, 158, 255, 0.1);
+  box-shadow: 0 0 12px rgba(171, 158, 255, 0.3);
+}
+
+.day-card-extra .calendar-icon {
+  width: 36px;
+  height: 36px;
+  animation: pulse 2s infinite ease-in-out;
+  margin-bottom: 0.3rem;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.modal-calendar {
+  justify-content: center;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.close-btn {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #ab9eff;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #9779f8;
+}

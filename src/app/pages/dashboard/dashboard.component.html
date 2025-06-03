@@ -1,0 +1,77 @@
+<body>
+  <div class="dashboard-wrapper">
+    <!-- Menú lateral -->
+    <div class="menu">
+      <ul class="menu-content">
+        <li>
+          <a routerLink="/login">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/salon">
+            <span class="material-symbols-outlined">app_registration</span>
+            <span>Gestionar Salón</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/employees">
+            <span class="material-symbols-outlined">groups_3</span>
+            <span>Empleados</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/unvailable-days">
+            <span class="material-symbols-outlined">calendar_apps_script</span>
+            <span>Días No Disponibles</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/services">
+            <span class="material-symbols-outlined">euro</span>
+            <span>Gestión de Servicios</span>
+          </a>
+        </li>
+        <li>
+          <button (click)="logout()" class="menu-button">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Logout</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Contenido del Dashboard -->
+    <div class="dashboard-container">
+      <h1 class="dashboard-title">¿DONDE LE GUSTARIA HACERSE SI CORTE?</h1>
+
+      <div *ngIf="userData; else notAuth">
+        <div class="user-info">
+        </div>
+      </div>
+
+      <ng-template #notAuth>
+        <p class="error-text">No estás autenticado. Redirigiendo al inicio de sesión...</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Tarjetas de Peluquerías -->
+  <div class="salones-grid">
+    <div class="peluqueria-card" *ngFor="let salon of salones">
+      <img [src]="salon.bannerUrl || '/assets/default-banner.jpg'" alt="Banner del salón" class="peluqueria-banner" />
+      
+      <div class="peluqueria-info">
+        <h2 class="peluqueria-nombre">{{ salon.name }}</h2>
+        <p class="horario">🕓 Abierto desde: {{ salon.openingHours }}</p>
+        <a [routerLink]="['/salon', salon.id]">
+          <button>
+            <span>Solicitar Cita</span>
+            <span>Reservar</span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>

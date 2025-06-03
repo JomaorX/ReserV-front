@@ -1,0 +1,39 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-center mb-6">Gestión de Días No Disponibles</h1>
+  
+    <!-- Formulario para agregar un día no disponible -->
+    <form [formGroup]="unavailableForm" (ngSubmit)="addUnavailableDay()" class="space-y-4">
+      <div>
+        <label for="date" class="block text-sm font-medium text-gray-700">Fecha:</label>
+        <input id="date" formControlName="date" type="date" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (unavailableForm.get('date')?.invalid && (unavailableForm.get('date')?.touched || unavailableForm.get('date')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">La fecha es obligatoria.</p>
+        }
+      </div>
+      <div>
+        <label for="reason" class="block text-sm font-medium text-gray-700">Motivo:</label>
+        <input id="reason" formControlName="reason" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        @if (unavailableForm.get('reason')?.invalid && (unavailableForm.get('reason')?.touched || unavailableForm.get('reason')?.dirty)) {
+          <p class="text-red-500 text-sm mt-1">El motivo es obligatorio.</p>
+        }
+      </div>
+      <button type="submit" [disabled]="unavailableForm.invalid" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Agregar Día No Disponible
+      </button>
+    </form>
+  
+    <!-- Lista de días no disponibles -->
+    <ul class="mt-6 space-y-4">
+      @for (day of unavailableDays; track day) {
+        <li class="p-4 border border-gray-300 rounded-md flex justify-between items-center">
+          <div>
+            <p><strong>Fecha:</strong> {{ day.date }}</p>
+            <p><strong>Motivo:</strong> {{ day.reason }}</p>
+          </div>
+          <button (click)="deleteUnavailableDay(day.id)" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Eliminar
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
