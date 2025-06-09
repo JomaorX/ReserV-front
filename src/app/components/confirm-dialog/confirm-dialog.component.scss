@@ -1,0 +1,30 @@
+.cancelar {
+    background-color: #F44336;
+    /* Rojo */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.aceptar {
+    background-color: #4CAF50;
+    /* Verde */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.mat-dialog-container {
+  background-color: #2C2C2C;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+}

@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SalonService } from '../salon/salon.services';
 import { FlatpickrDirective } from '../../shared/flatpickr.directive';
+import { NotificationService } from '../../services/notificacion.service';
 
 @Component({
   selector: 'app-salon-detail',
   standalone: true,
   imports: [CommonModule, FormsModule, FlatpickrDirective],
   templateUrl: './salon-detail.component.html',
-  styleUrls: ['./salon-detail.component.scss']
+  styleUrls: ['./salon-detail.component.scss'],
 })
 export class SalonDetailComponent implements OnInit {
   salonId: string = '';
@@ -30,8 +31,8 @@ export class SalonDetailComponent implements OnInit {
       mes: 'May',
       horas: [
         { hora: '2:00 PM', reservado: false },
-        { hora: '3:00 PM', reservado: false }
-      ]
+        { hora: '3:00 PM', reservado: false },
+      ],
     },
     {
       diaSemana: 'Saturday',
@@ -39,8 +40,8 @@ export class SalonDetailComponent implements OnInit {
       mes: 'May',
       horas: [
         { hora: '2:00 PM', reservado: false },
-        { hora: '3:00 PM', reservado: false }
-      ]
+        { hora: '3:00 PM', reservado: false },
+      ],
     },
     {
       diaSemana: 'Sunday',
@@ -48,8 +49,8 @@ export class SalonDetailComponent implements OnInit {
       mes: 'June',
       horas: [
         { hora: '2:00 PM', reservado: false },
-        { hora: '3:00 PM', reservado: false }
-      ]
+        { hora: '3:00 PM', reservado: false },
+      ],
     },
     {
       diaSemana: 'Monday',
@@ -57,16 +58,36 @@ export class SalonDetailComponent implements OnInit {
       mes: 'June',
       horas: [
         { hora: '2:00 PM', reservado: false },
-        { hora: '3:00 PM', reservado: false }
-      ]
-    }
+        { hora: '3:00 PM', reservado: false },
+      ],
+    },
   ];
 
   fechasExtendidas = [
-    { dia: '4', mes: 'June', diaSemana: 'Wednesday', horas: [{ hora: '10:00 AM', reservado: false }] },
-    { dia: '5', mes: 'June', diaSemana: 'Thursday', horas: [{ hora: '11:00 AM', reservado: false }] },
-    { dia: '6', mes: 'June', diaSemana: 'Friday', horas: [{ hora: '12:00 PM', reservado: false }] },
-    { dia: '7', mes: 'June', diaSemana: 'Saturday', horas: [{ hora: '1:00 PM', reservado: false }] }
+    {
+      dia: '4',
+      mes: 'June',
+      diaSemana: 'Wednesday',
+      horas: [{ hora: '10:00 AM', reservado: false }],
+    },
+    {
+      dia: '5',
+      mes: 'June',
+      diaSemana: 'Thursday',
+      horas: [{ hora: '11:00 AM', reservado: false }],
+    },
+    {
+      dia: '6',
+      mes: 'June',
+      diaSemana: 'Friday',
+      horas: [{ hora: '12:00 PM', reservado: false }],
+    },
+    {
+      dia: '7',
+      mes: 'June',
+      diaSemana: 'Saturday',
+      horas: [{ hora: '1:00 PM', reservado: false }],
+    },
   ];
 
   diaSeleccionado: any = null;
@@ -82,7 +103,8 @@ export class SalonDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private salonService: SalonService
+    private salonService: SalonService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +115,10 @@ export class SalonDetailComponent implements OnInit {
   cargarSalon(): void {
     this.salonService.getSalonById(this.salonId).subscribe({
       next: (data) => (this.salon = data),
-      error: (err) => console.error('Error al cargar la peluquería:', err)
+      error: (err) => {
+        console.error('Error al cargar la peluquería:', err);
+        this.notificationService.showError('Error al cargar la peluquería.');
+      },
     });
   }
 
@@ -115,14 +140,18 @@ export class SalonDetailComponent implements OnInit {
 
   confirmarFechaHora(): void {
     if (!this.fechaYHoraCompleta) {
-      alert("Selecciona una fecha y hora válida.");
+      this.notificationService.showWarning(
+        'Selecciona una fecha y hora válida.'
+      );
       return;
     }
 
     this.fechaSeleccionada = this.fechaYHoraCompleta;
     this.horaSeleccionada = { hora: this.fechaYHoraCompleta, reservado: false };
 
-    alert(`Has reservado para el ${this.fechaYHoraCompleta}`);
+    this.notificationService.showSuccess(
+      `Has reservado para el ${this.fechaYHoraCompleta}.`
+    );
     this.modalFechaHoraAbierto = false;
   }
 
@@ -133,7 +162,7 @@ export class SalonDetailComponent implements OnInit {
 
   seleccionarHora(dia: any, hora: any): void {
     if (hora.reservado) {
-      alert('Esta hora ya está reservada.');
+      this.notificationService.showError('Esta hora ya está reservada.');
       return;
     }
 
@@ -143,13 +172,17 @@ export class SalonDetailComponent implements OnInit {
     const fechaStr = `${dia.dia} ${dia.mes}`;
     this.fechaSeleccionada = fechaStr;
 
-    alert(`Has reservado para el ${fechaStr} a las ${hora.hora}`);
+    this.notificationService.showSuccess(
+      `Has reservado para el ${fechaStr} a las ${hora.hora}.`
+    );
     this.modalAbierto = false;
   }
 
   solicitarCita(): void {
     if (!this.fechaSeleccionada || !this.peluqueroSeleccionado) {
-      alert('Por favor, completa todos los campos.');
+      this.notificationService.showWarning(
+        'Por favor, completa todos los campos.'
+      );
       return;
     }
 
@@ -158,9 +191,9 @@ export class SalonDetailComponent implements OnInit {
       fecha: this.fechaSeleccionada,
       peluquero: this.peluqueroSeleccionado,
       detalle: this.detalleCita,
-      hora: this.horaSeleccionada?.hora || 'sin hora'
+      hora: this.horaSeleccionada?.hora || 'sin hora',
     });
 
-    alert('Cita solicitada con éxito (simulado).');
+    this.notificationService.showSuccess('Cita solicitada con éxito.');
   }
 }

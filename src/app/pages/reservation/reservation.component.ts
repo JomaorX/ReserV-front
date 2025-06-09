@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ReservationService } from '../../services/reservation.service';
 import { SalonService } from '../../services/salon.service';
 import { EmployeeService } from '../../services/employee.service';
 import { ServiceService } from '../../services/service.service';
+import { NotificationService } from '../../services/notificacion.service';
 
 @Component({
   selector: 'app-reservation',
@@ -22,7 +28,8 @@ export class ReservationComponent implements OnInit {
     private reservationService: ReservationService,
     private salonService: SalonService,
     private employeeService: EmployeeService,
-    private serviceService: ServiceService
+    private serviceService: ServiceService,
+    private notificationService: NotificationService
   ) {
     this.reservationForm = new FormGroup({
       salonId: new FormControl('', [Validators.required]),
@@ -47,7 +54,7 @@ export class ReservationComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar los salones:', error);
-        alert('Error al cargar los salones.');
+        this.notificationService.showError('Error al cargar los salones.');
       },
     });
   }
@@ -60,7 +67,7 @@ export class ReservationComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar los peluqueros:', error);
-        alert('Error al cargar los peluqueros.');
+        this.notificationService.showError('Error al cargar los peluqueros.');
       },
     });
   }
@@ -73,7 +80,7 @@ export class ReservationComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cargar los servicios:', error);
-        alert('Error al cargar los servicios.');
+        this.notificationService.showError('Error al cargar los servicios.');
       },
     });
   }
@@ -81,21 +88,25 @@ export class ReservationComponent implements OnInit {
   onSubmit(): void {
     if (this.reservationForm.valid) {
       const reservationData = this.reservationForm.value;
-      reservationData.salonId = parseInt(reservationData.salonId); // Asegurarse de que sea un número
+      reservationData.salonId = parseInt(reservationData.salonId); // Asegurar que sea un número
 
       // Crear la reserva usando el servicio
       this.reservationService.createReservation(reservationData).subscribe({
         next: () => {
-          alert('Reserva realizada con éxito.');
+          this.notificationService.showSuccess('Reserva realizada con éxito.');
           this.reservationForm.reset(); // Limpiar el formulario
         },
         error: (error) => {
           console.error('Error al crear la reserva:', error);
-          alert('Ocurrió un error al realizar la reserva. Inténtalo de nuevo.');
+          this.notificationService.showError(
+            'Ocurrió un error al realizar la reserva. Inténtalo de nuevo.'
+          );
         },
       });
     } else {
-      alert('Por favor, completa todos los campos correctamente.');
+      this.notificationService.showWarning(
+        'Por favor, completa todos los campos correctamente.'
+      );
     }
   }
 }

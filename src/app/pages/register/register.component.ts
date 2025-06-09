@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../services/notificacion.service';
+
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrl: './register.component.scss',
 })
-
 export class RegisterComponent {
   registerForm: FormGroup;
   name: FormControl;
@@ -16,10 +22,16 @@ export class RegisterComponent {
   role: FormControl; // Nuevo campo para el rol
   errorMessage: string = ''; // Para mostrar mensajes de error del backend
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {
     this.name = new FormControl('', [Validators.required]);
     this.email = new FormControl('', [Validators.required, Validators.email]);
-    this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]);
     this.role = new FormControl('client'); // Valor por defecto: 'client'
 
     this.registerForm = new FormGroup({
@@ -36,15 +48,22 @@ export class RegisterComponent {
 
       this.authService.register(name, email, password, role).subscribe({
         next: () => {
-          alert('Registro exitoso. Por favor, inicia sesión.');
+          this.notificationService.showSuccess(
+            'Registro exitoso. Por favor, inicia sesión.'
+          );
           this.authService.logout(); // Redirige al formulario de inicio de sesión
         },
         error: (error) => {
           console.error('Error en el registro:', error);
-          alert('Error al registrar. Inténtalo de nuevo.');
+          this.notificationService.showError(
+            'Error al registrar. Inténtalo de nuevo.'
+          );
         },
       });
     } else {
+      this.notificationService.showWarning(
+        'Por favor, completa todos los campos correctamente.'
+      );
       console.log('Formulario inválido');
     }
   }
