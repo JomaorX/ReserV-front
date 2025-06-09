@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmployeeService {
   private apiUrl = 'http://localhost:3000/api/employees'; // URL del backend
@@ -16,6 +16,10 @@ export class EmployeeService {
   // Obtener todos los empleados
   getEmployees() {
     return this.http.get<any[]>(this.apiUrl, { headers: this.headers });
+  }
+
+  getEmployeesBySalon(salonId: number) {
+    return this.http.get<any[]>(`${this.apiUrl}?salonId=${salonId}`,{ headers: this.headers });
   }
 
   // Crear un nuevo empleado

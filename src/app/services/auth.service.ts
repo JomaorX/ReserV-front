@@ -18,7 +18,12 @@ export class AuthService {
 
   // Método para registrar un nuevo usuario
   register(name: string, email: string, password: string, role: string) {
-    return this.http.post(`${this.apiUrl}/register`, { name, email, password, role });
+    return this.http.post(`${this.apiUrl}/register`, {
+      name,
+      email,
+      password,
+      role,
+    });
   }
 
   // Obtener el token desde localStorage
@@ -47,7 +52,7 @@ export class AuthService {
     return null;
   }
 
-  getAuth(): HttpHeaders{
+  getAuth(): HttpHeaders {
     const token = this.getToken(); // Obtén el token del usuario autenticado
 
     // Configura el encabezado Authorization con el token

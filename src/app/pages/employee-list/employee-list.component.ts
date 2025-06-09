@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NotificationService } from '../../services/notificacion.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -20,7 +21,8 @@ export class EmployeeListComponent implements OnInit {
 
   constructor(
     private employeeService: EmployeeService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) {
     this.employeeForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -35,7 +37,15 @@ export class EmployeeListComponent implements OnInit {
 
   // Cargar empleados desde el backend
   loadEmployees(): void {
-    this.employeeService.getEmployees().subscribe({
+    const userData: any = this.authService.getUserData(); // Obtener el ID del salón desde el token
+    const salonId = userData.salonId;
+    console.log("Salon asignado : ",salonId, "userData :",userData);
+    if (!salonId) {
+      this.notificationService.showError('No tienes un salón asignado.');
+      return;
+    }
+
+    this.employeeService.getEmployeesBySalon(salonId).subscribe({
       next: (data) => {
         this.employees = data;
       },
