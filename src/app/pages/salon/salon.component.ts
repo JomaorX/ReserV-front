@@ -91,6 +91,14 @@ export class SalonComponent implements OnInit {
       if (this.salon) {
         this.salonService.updateSalon(this.salon.id, data).subscribe({
           next: (res) => {
+            const newToken = res.token;
+            console.log("RESPUESTA",res);
+            if (newToken) {
+              const tokViejo = localStorage.getItem('token');
+              console.log('Token viejo', tokViejo);
+              const tokNuevo = localStorage.setItem('token', newToken); // ✅ Guardar el nuevo token con el salonId actualizado
+              console.log('Token nuevo', tokNuevo);
+            }
             this.notificationService.showSuccess(
               'Salón actualizado correctamente.'
             );
