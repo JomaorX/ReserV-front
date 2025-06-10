@@ -1,38 +1,98 @@
+/* Contenedor del salón */
 .salon-container {
-  max-width: 700px;
+  max-width: 900px;
   margin: auto;
-  padding: 20px;
-  background: linear-gradient(180deg, #1E1E1E, #121212); // 🔥 Fondo más trabajado
-  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
 }
 
+/* Tarjeta del salón */
 .salon-card {
-  background: rgba(30, 30, 30, 0.9); // 🔥 Más elegante con transparencia
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); // 🔥 Sombra para profundidad
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Banner */
+.salon-banner {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+/* Información del salón */
+.salon-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 1rem;
+}
+
+.salon-location,
+.salon-hours {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Tabla de servicios */
 .services-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
 }
 
-th {
-  background-color: #282828; // 🔹 Fondo más contrastante en encabezados
-  color: #FFD700; // 🔥 Color dorado como el resto de la aplicación
+.services-table th,
+.services-table td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-td {
-  background-color: rgba(30, 30, 30, 0.8);
-  color: #ffffff;
+.services-table th {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
+.services-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Botón de reserva */
 .reserve-button {
-  background: linear-gradient(90deg, #FFD700, #FFA500); // 🔥 Botón con efecto degradado dorado
-  color: #000 !important;;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-weight: bold;
+  padding: 0.5rem 1rem;
+  background: #0057d9;
+  color: white;
+  border-radius: 0.5rem;
+  transition: background 0.3s;
+}
+
+.reserve-button:hover {
+  background: #0040a3;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .salon-card {
+    max-width: 90%;
+  }
+
+  .services-table th,
+  .services-table td {
+    padding: 0.8rem;
+  }
 }

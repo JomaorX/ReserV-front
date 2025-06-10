@@ -1,51 +1,57 @@
 <app-sidebar></app-sidebar>
-<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-center mb-6">Gestión de Empleados</h1>
-  
-    <!-- Formulario para agregar un empleado -->
-    <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()" class="space-y-4">
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
-        <input id="name" formControlName="name" type="text" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        @if (employeeForm.get('name')?.invalid && (employeeForm.get('name')?.touched || employeeForm.get('name')?.dirty)) {
-          <p class="text-red-500 text-sm mt-1">El nombre es obligatorio.</p>
-        }
-      </div>
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico:</label>
-        <input id="email" formControlName="email" type="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        @if (employeeForm.get('email')?.invalid && (employeeForm.get('email')?.touched || employeeForm.get('email')?.dirty)) {
-          <p class="text-red-500 text-sm mt-1">El correo electrónico es obligatorio y debe ser válido.</p>
-        }
-      </div>
-      <div>
-        <label for="role" class="block text-sm font-medium text-gray-700">Rol:</label>
-        <select id="role" formControlName="role" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            <option value="stylist">Estilista</option>
-            <option value="receptionist">Recepcionista</option>
-            <option value="manager">Gerente</option>
-            <option value="cleaner">Personal de Limpieza</option>
-        </select>
-        @if (employeeForm.get('role')?.invalid && (employeeForm.get('role')?.touched || employeeForm.get('role')?.dirty)) {
-          <p class="text-red-500 text-sm mt-1">El rol es obligatorio.</p>
-        }
-      </div>
-      <button type="submit" [disabled]="employeeForm.invalid" class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Agregar Empleado
-      </button>
-    </form>
-  
-    <!-- Lista de empleados -->
-    <ul class="mt-6 space-y-4">
-      @for (employee of employees; track employee) {
-        <li class="p-4 border border-gray-300 rounded-md">
-          <p><strong>Nombre:</strong> {{ employee.name }}</p>
-          <p><strong>Correo Electrónico:</strong> {{ employee.email }}</p>
-          <p><strong>Rol:</strong> {{ employee.role }}</p>
-          <button (click)="deleteEmployee(employee.id)" class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-            Eliminar
-          </button>
-        </li>
-      }
-    </ul>
-  </div>
+<div class="container">
+    
+    <!-- Sección del formulario -->
+    <div class="form-container">
+        <h1 class="text-2xl font-bold text-center mb-6">Gestión de Empleados</h1>
+        <form [formGroup]="employeeForm" (ngSubmit)="addEmployee()" class="space-y-4">
+            <div>
+                <label for="name">Nombre:</label>
+                <input id="name" formControlName="name" type="text" class="input-field">
+                @if (employeeForm.get('name')?.invalid && (employeeForm.get('name')?.touched || employeeForm.get('name')?.dirty)) {
+                    <p class="error-text">El nombre es obligatorio.</p>
+                }
+            </div>
+            <div>
+                <label for="email">Correo Electrónico:</label>
+                <input id="email" formControlName="email" type="email" class="input-field">
+                @if (employeeForm.get('email')?.invalid && (employeeForm.get('email')?.touched || employeeForm.get('email')?.dirty)) {
+                    <p class="error-text">El correo electrónico es obligatorio y debe ser válido.</p>
+                }
+            </div>
+            <div>
+                <label for="role">Rol:</label>
+                <select id="role" formControlName="role" class="input-field">
+                    <option value="stylist">Estilista</option>
+                    <option value="receptionist">Recepcionista</option>
+                    <option value="manager">Gerente</option>
+                    <option value="cleaner">Personal de Limpieza</option>
+                </select>
+                @if (employeeForm.get('role')?.invalid && (employeeForm.get('role')?.touched || employeeForm.get('role')?.dirty)) {
+                    <p class="error-text">El rol es obligatorio.</p>
+                }
+            </div>
+            <button type="submit" [disabled]="employeeForm.invalid" class="submit-btn">
+                Agregar Empleado
+            </button>
+        </form>
+    </div>
+
+    <!-- Sección de lista de empleados -->
+    <div class="list-container">
+        <h2 class="text-xl font-semibold mb-4">Lista de Empleados</h2>
+        <ul class="space-y-4">
+            @for (employee of employees; track employee) {
+                <li class="employee-card">
+                    <p><strong>Nombre:</strong> {{ employee.name }}</p>
+                    <p><strong>Correo Electrónico:</strong> {{ employee.email }}</p>
+                    <p><strong>Rol:</strong> {{ employee.role }}</p>
+                    <button (click)="deleteEmployee(employee.id)" class="delete-btn">
+                        Eliminar
+                    </button>
+                </li>
+            }
+        </ul>
+    </div>
+
+</div>

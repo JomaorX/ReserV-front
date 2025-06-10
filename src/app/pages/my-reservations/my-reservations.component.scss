@@ -1,0 +1,96 @@
+/* Contenedor principal */
+.container {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Sección de citas */
+.appointments-container {
+    width: 100%;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Lista de reservas */
+.reservations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Tarjetas de cita */
+.reservation-card {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.reservation-card:hover {
+    transform: scale(1.03);
+}
+
+/* Grupo de botones */
+.buttons-group {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+/* Botón Modificar */
+.update-btn {
+    padding: 0.5rem 1rem;
+    background: #0057d9;
+    color: white;
+    border-radius: 0.5rem;
+    transition: background 0.3s;
+}
+
+.update-btn:hover {
+    background: #0040a3;
+}
+
+/* Botón Cancelar */
+.delete-btn {
+    padding: 0.5rem 1rem;
+    background: #b50000;
+    color: white;
+    border-radius: 0.5rem;
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
+    background: #880000;
+}
+
+/* Texto sin citas */
+.no-appointments-text {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: 1rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .reservation-card {
+        padding: 0.8rem;
+    }
+
+    .buttons-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

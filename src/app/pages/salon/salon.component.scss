@@ -1,146 +1,122 @@
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #000000;
-  color: white;
-}
-
+/* Contenedor principal */
 .salon-container {
+  max-width: 900px;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
 }
 
+/* Banner */
 .banner-wrapper {
-  position: relative;
   width: 100%;
-  height: 300px;
-  overflow: hidden;
-
-  .banner-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.7);
-  }
-
-  .salon-name {
-    position: absolute;
-    bottom: 20px;
-    left: 40px;
-    font-size: 3rem;
-    color: white;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-  }
+  text-align: center;
+  position: relative;
 }
 
+.banner-img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.salon-name {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Formulario */
 .salon-form {
-  flex: 1;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Organización en columnas */
 .form-columns {
   display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .form-left,
 .form-right {
   flex: 1;
-  min-width: 300px;
 }
 
+/* Grupos de formulario */
 .form-group {
-  margin-bottom: 20px;
-
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 6px;
-    color: #ffffff;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-  }
-
-  input[type="text"],
-  input[type="file"] {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 1rem;
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
-    &::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    &:focus {
-      border-bottom: 2px solid white;
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
-    }
-  }
+  margin-bottom: 1rem;
 }
 
+.form-group label {
+  font-size: 1rem;
+  color: white;
+}
 
-  input[type="text"],
-  input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 1rem;
-  }
+.form-group input {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid #555;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
 
+/* Botón */
+.submit-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #6200ea;
+  color: white;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  transition: 0.3s;
+}
 
+.submit-btn:hover {
+  background: #4500b5;
+}
+
+/* Mapa */
 .map-container {
   position: relative;
-
-  .leaflet-map {
-    width: 100%;
-    height: 300px;
-    border-radius: 10px;
-  }
-
-  .map-marker-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -100%);
-    width: 30px;
-    height: 40px;
-    z-index: 999;
-    pointer-events: none;
-  }
+  width: 100%;
+  height: 300px;
 }
 
+.map-marker-center {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
-
-.submit-btn {
-  margin-top: 30px;
-  padding: 12px 20px;
-  background-color: #4a67f2;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background-color: #3d54cc;
+/* Responsividad */
+@media (max-width: 768px) {
+  .form-columns {
+    flex-direction: column;
   }
 
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  .salon-name {
+    font-size: 1.5rem;
+  }
+
+  .map-container {
+    height: 200px;
   }
 }

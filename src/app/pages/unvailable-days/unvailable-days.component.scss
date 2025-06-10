@@ -1,0 +1,108 @@
+/* Contenedor principal */
+.unavailable-container {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Títulos */
+.title,
+.list-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+/* Formulario */
+.unavailable-form {
+    width: 100%;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-size: 1rem;
+    color: white;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid #555;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Botón */
+.submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: #6200ea;
+    color: white;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #4500b5;
+}
+
+/* Lista de días no disponibles */
+.unavailable-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Tarjetas de días no disponibles */
+.unavailable-item {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Botón de eliminación */
+.delete-btn {
+    padding: 0.5rem 1rem;
+    background: #b50000;
+    color: white;
+    border-radius: 0.5rem;
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
+    background: #880000;
+}
+
+/* Estilos de errores */
+.error-text {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .unavailable-item {
+        flex-direction: column;
+        text-align: center;
+    }
+}
