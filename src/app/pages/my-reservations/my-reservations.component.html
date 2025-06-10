@@ -5,8 +5,8 @@
       <div class="space-y-4">
         @for (reservation of reservations; track reservation.id) {
           <div class="p-4 border rounded-lg">
-            <p><strong>Peluquero:</strong> {{ reservation.barber }}</p>
-            <p><strong>Servicio:</strong> {{ reservation.service }}</p>
+            <p><strong>Peluquero:</strong> {{ reservation.barber?.name }}</p>
+            <p><strong>Servicio:</strong> {{ reservation.service?.name }}</p>
             <p><strong>Fecha:</strong> {{ reservation.date }}</p>
             <p><strong>Hora:</strong> {{ reservation.time }}</p>
             <div class="flex space-x-2 mt-2">

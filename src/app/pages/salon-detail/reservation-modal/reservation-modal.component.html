@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Reserva tu cita</h2>
+
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()" class="reservation-form">
+
+    <mat-form-field>
+        <mat-label>Elige una fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Elige una hora</mat-label>
+        <input matInput formControlName="time" [matTimepicker]="minutesPicker">
+        <mat-timepicker-toggle matIconSuffix [for]="minutesPicker"/>
+        <mat-timepicker interval="30min" #minutesPicker/>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Peluquero</mat-label>
+        <mat-select formControlName="barberId">
+            <mat-option value="Cualquiera">Cualquiera</mat-option>
+            @for (barber of barbers; track barber.id) {
+                <mat-option [value]="barber.id">{{ barber.name }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+
+    <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="reservationForm.invalid">
+            Reservar
+        </button>
+        <button mat-button type="button" (click)="dialogRef.close()">Cancelar</button>
+    </div>
+</form>
