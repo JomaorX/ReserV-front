@@ -55,9 +55,10 @@ export class SalonDetailComponent implements OnInit {
 
   cargarSalon(): void {
     this.salonService.getSalonById(+this.salonId).subscribe({
-      next: (data) => (this.salon = data),
+      next: (data) => (console.log("La data es: ",data[0]), this.salon = data[0]),
       error: (err) => this.handleError('Error al cargar la peluquería', err),
     });
+    console.log("Datos del salon obtenidos",this.salon);
   }
 
   loadServices(): void {
