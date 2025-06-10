@@ -12,44 +12,58 @@ import { adminGuard } from './guards/admin.guard';
 import { UnavailableDaysComponent } from './pages/unvailable-days/unvailable-days.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { SalonComponent } from './pages/salon/salon.component';
+import { SalonDetailComponent } from './pages/salon-detail/salon-detail.component';
 
 
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent }, // Página de inicio
-    { path: 'login', component: LoginComponent }, // Página de inicio de sesión
-    { path: 'register', component: RegisterComponent }, // Página de registro
-    { path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [authGuard], // Proteger la ruta con AuthGuard
-    },
-    { path: 'reservation',
-        component: ReservationComponent,
-        canActivate: [authGuard], // Proteger la ruta con AuthGuard
-    },
-    { path: 'my-reservations',
-        component: MyReservationsComponent,
-        canActivate: [authGuard], // Proteger la ruta con AuthGuard
-    },{ path: 'admin-dashboard',
-        component: AdminDashboardComponent,
-        canActivate: [adminGuard], // Proteger la ruta con AuthGuard
-    },{ path: 'employees',
-        component: EmployeeListComponent,
-        canActivate: [adminGuard], // Proteger la ruta con AuthGuard
-    },{ path: 'unvailable-days',
-        component: UnavailableDaysComponent,
-        canActivate: [adminGuard], // Proteger la ruta con AuthGuard
-    },{ path: 'services',
-        component: ServicesComponent,
-        canActivate: [adminGuard], // Proteger la ruta con AuthGuard
-    },{ path: 'salon',
-        component: SalonComponent,
-        canActivate: [adminGuard], // Proteger la ruta con AuthGuard
-    },
-{
-  path: 'salon/:id',
-  loadComponent: () => import('./pages/salon-detail/salon-detail.component').then(m => m.SalonDetailComponent)
-}
-
+  { path: '', component: HomeComponent }, // Página de inicio
+  { path: 'login', component: LoginComponent }, // Página de inicio de sesión
+  { path: 'register', component: RegisterComponent }, // Página de registro
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'reservation',
+    component: ReservationComponent,
+    canActivate: [authGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'my-reservations',
+    component: MyReservationsComponent,
+    canActivate: [authGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'employees',
+    component: EmployeeListComponent,
+    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'unvailable-days',
+    component: UnavailableDaysComponent,
+    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'services',
+    component: ServicesComponent,
+    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'salon',
+    component: SalonComponent,
+    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'salon/:id',
+    component: SalonDetailComponent,
+    canActivate: [authGuard],
+  },
 ];
 

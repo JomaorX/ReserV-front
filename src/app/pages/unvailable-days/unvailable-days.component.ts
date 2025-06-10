@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UnavailableDayService } from '../../services/unvailable-days.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotificationService } from '../../services/notificacion.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-unvailable-days',
@@ -15,7 +16,8 @@ export class UnavailableDaysComponent {
 
   constructor(
     private unavailableDayService: UnavailableDayService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) {
     this.unavailableForm = new FormGroup({
       date: new FormControl('', [Validators.required]),
@@ -28,7 +30,15 @@ export class UnavailableDaysComponent {
   }
 
   loadUnavailableDays(): void {
-    this.unavailableDayService.getUnavailableDays().subscribe({
+    const userData: any = this.authService.getUserData(); // Obtener el ID del salón desde el token
+    const salonId = userData.salonId;
+    console.log('Salon asignado : ', salonId, 'userData :', userData);
+    if (!salonId) {
+      this.notificationService.showError('No tienes un salón asignado.');
+      return;
+    }
+
+    this.unavailableDayService.getUnavailableDaysBySalon(salonId).subscribe({
       next: (data) => {
         this.unavailableDays = data;
       },
