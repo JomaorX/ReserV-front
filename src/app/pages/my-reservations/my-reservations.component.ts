@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../../services/reservation.service';
 import { CommonModule } from '@angular/common'; // 💡 Aquí está el *ngIf
 import { NotificationService } from '../../services/notificacion.service';
+import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-my-reservations',
   standalone: true,
   templateUrl: './my-reservations.component.html',
   styleUrls: ['./my-reservations.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, SidebarComponent],
 })
 export class MyReservationsComponent implements OnInit {
   reservations: any[] = [];

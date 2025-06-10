@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialog } from '@angular/material/dialog';
 import { ReservationModalComponent } from './reservation-modal/reservation-modal.component';
 import { SalonService } from '../../services/salon.service';
+import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 
 
 
@@ -27,7 +28,8 @@ import { SalonService } from '../../services/salon.service';
     MatIconModule,
     MatDividerModule,
     MatListModule,
-  ],
+    SidebarComponent
+],
   templateUrl: './salon-detail.component.html',
   styleUrls: ['./salon-detail.component.scss'],
 })

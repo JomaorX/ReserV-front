@@ -3,10 +3,11 @@ import { UnavailableDayService } from '../../services/unvailable-days.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotificationService } from '../../services/notificacion.service';
 import { AuthService } from '../../services/auth.service';
+import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-unvailable-days',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SidebarComponent],
   templateUrl: './unvailable-days.component.html',
   styleUrl: './unvailable-days.component.scss',
 })

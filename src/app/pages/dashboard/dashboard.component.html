@@ -1,46 +1,6 @@
 <body>
   <div class="dashboard-wrapper">
-    <!-- Menú lateral -->
-    <div class="menu">
-      <ul class="menu-content">
-        <li>
-          <a routerLink="/login">
-            <span class="material-symbols-outlined">home</span>
-            <span>Home</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/salon">
-            <span class="material-symbols-outlined">app_registration</span>
-            <span>Gestionar Salón</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/employees">
-            <span class="material-symbols-outlined">groups_3</span>
-            <span>Empleados</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/unvailable-days">
-            <span class="material-symbols-outlined">calendar_apps_script</span>
-            <span>Días No Disponibles</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="/services">
-            <span class="material-symbols-outlined">euro</span>
-            <span>Gestión de Servicios</span>
-          </a>
-        </li>
-        <li>
-          <button (click)="logout()" class="menu-button">
-            <span class="material-symbols-outlined">logout</span>
-            <span>Logout</span>
-          </button>
-        </li>
-      </ul>
-    </div>
+    <app-sidebar></app-sidebar>
 
     <!-- Contenido del Dashboard -->
     <div class="dashboard-container">

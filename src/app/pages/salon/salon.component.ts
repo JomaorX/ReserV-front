@@ -10,11 +10,12 @@ import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notificacion.service';
 import { SalonService } from '../../services/salon.service';
+import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-salon',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
   templateUrl: './salon.component.html',
   styleUrl: './salon.component.scss',
 })

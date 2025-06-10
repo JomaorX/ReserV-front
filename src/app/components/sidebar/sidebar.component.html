@@ -1,0 +1,60 @@
+<div class="menu">
+    <ul class="menu-content">
+      <!-- Mostrar opciones solo si el usuario está autenticado -->
+      @if (authService.isAuthenticated() && userData) {
+        @if (userData.role === 'client') {
+          <li>
+            <a routerLink="/dashboard" class="menu-link">
+              <span class="material-symbols-outlined">dashboard</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/my-reservations" class="menu-link">
+              <span class="material-symbols-outlined">book_online</span>
+              <span>Mis Reservas</span>
+            </a>
+          </li>
+        }
+        @if (userData.role === 'admin') {
+          <li>
+            <a routerLink="/admin-dashboard" class="menu-link">
+              <span class="material-symbols-outlined">settings</span>
+              <span>Panel de Control</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/salon" class="menu-link">
+              <span class="material-symbols-outlined">storefront</span>
+              <span>Salón</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/employees" class="menu-link">
+              <span class="material-symbols-outlined">groups</span>
+              <span>Empleados</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/unvailable-days" class="menu-link">
+              <span class="material-symbols-outlined">event_busy</span>
+              <span>Días no disponibles</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/services" class="menu-link">
+              <span class="material-symbols-outlined">design_services</span>
+              <span>Servicios</span>
+            </a>
+          </li>
+        }
+        <li>
+          <button (click)="logout()" class="menu-button">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Cerrar Sesión</span>
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+  

@@ -8,10 +8,11 @@ import {
 } from '@angular/forms';
 import { NotificationService } from '../../services/notificacion.service';
 import { AuthService } from '../../services/auth.service';
+import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 
 @Component({
   selector: 'app-services',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SidebarComponent],
   templateUrl: './services.component.html',
   styleUrl: './services.component.scss',
 })

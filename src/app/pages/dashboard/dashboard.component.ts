@@ -3,7 +3,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { SalonService } from '../../services/salon.service';
-import { Salon } from '../../interfaces/salon'; // Asegúrate de tener esta interfaz creada
+import { Salon } from '../../interfaces/salon';
+import { SidebarComponent } from "../../components/sidebar/sidebar.component"; // Asegúrate de tener esta interfaz creada
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +12,9 @@ import { Salon } from '../../interfaces/salon'; // Asegúrate de tener esta inte
   imports: [
     RouterModule,
     CommonModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    SidebarComponent
+],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
