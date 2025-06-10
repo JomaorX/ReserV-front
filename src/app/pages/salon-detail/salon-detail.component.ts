@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { SalonService } from '../salon/salon.services';
 import { NotificationService } from '../../services/notificacion.service';
 import { ServiceService } from '../../services/service.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatDialog } from '@angular/material/dialog';
 import { ReservationModalComponent } from './reservation-modal/reservation-modal.component';
+import { SalonService } from '../../services/salon.service';
 
 
 
@@ -52,7 +52,7 @@ export class SalonDetailComponent implements OnInit {
   }
 
   cargarSalon(): void {
-    this.salonService.getSalonById(this.salonId).subscribe({
+    this.salonService.getSalonById(+this.salonId).subscribe({
       next: (data) => (this.salon = data),
       error: (err) => this.handleError('Error al cargar la peluquería', err),
     });

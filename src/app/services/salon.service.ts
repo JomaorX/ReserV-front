@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,37 +15,30 @@ export class SalonService {
   }
 
   // Crear un nuevo salón
-  createSalon(name: string, location: string, openingHours: string) {
-    return this.http.post(
-      this.apiUrl,
-      { name, location, openingHours },
-      { headers: this.headers }
-    );
+  createSalon(data: any): Observable<any> {
+    return this.http.post(this.apiUrl, { headers: this.headers });
   }
 
   // Obtener el salón del administrador autenticado
-  getMySalon() {
+  getMySalon(): Observable<any> {
     return this.http.get(`${this.apiUrl}/me`, { headers: this.headers });
   }
 
-  getSalonById(salonId: number) {
+  getSalonById(salonId: number): Observable<any> {
     return this.http.get<any[]>(`${this.apiUrl}?salonId=${salonId}`, {
       headers: this.headers,
     });
   }
 
+  getAllSalons(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl); // GET a /api/salons
+  }
+
   // Actualizar un salón
-  updateSalon(
-    id: number,
-    name: string,
-    location: string,
-    openingHours: string
-  ) {
-    return this.http.put(
-      `${this.apiUrl}/${id}`,
-      { name, location, openingHours },
-      { headers: this.headers }
-    );
+  updateSalon(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, data, {
+      headers: this.headers,
+    });
   }
 
   // Obtener todos los salones

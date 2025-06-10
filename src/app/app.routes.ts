@@ -4,7 +4,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authGuard } from './guards/auth.guard';
-import { ReservationComponent } from './pages/reservation/reservation.component';
 import { MyReservationsComponent } from './pages/my-reservations/my-reservations.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
@@ -23,11 +22,6 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [authGuard], // Proteger la ruta con AuthGuard
-  },
-  {
-    path: 'reservation',
-    component: ReservationComponent,
     canActivate: [authGuard], // Proteger la ruta con AuthGuard
   },
   {

@@ -5,11 +5,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { SalonService } from '../salon/salon.services';
 import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notificacion.service';
+import { SalonService } from '../../services/salon.service';
 
 @Component({
   selector: 'app-salon',
