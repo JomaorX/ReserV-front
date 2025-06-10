@@ -16,7 +16,7 @@ export class SalonService {
 
   // Crear un nuevo salón
   createSalon(data: any): Observable<any> {
-    return this.http.post(this.apiUrl, { headers: this.headers });
+    return this.http.post(this.apiUrl, data, { headers: this.headers });
   }
 
   // Obtener el salón del administrador autenticado
