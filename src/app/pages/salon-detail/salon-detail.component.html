@@ -1,5 +1,8 @@
-<div class="salon-container">
-  <app-sidebar></app-sidebar>
+
+<body>
+    <app-sidebar></app-sidebar>
+    <div class="salon-container">
+  
 
   <!-- Información del Salón -->
   <mat-card class="salon-card">
@@ -31,8 +34,9 @@
                   <td>{{ service.price | currency:'EUR' }}</td>
                   <td>{{ service.duration }} min</td>
                   <td>
-                      <button mat-button color="primary" class="reserve-button" (click)="abrirModalReserva(service)">
-                          Reservar
+                      <button class="reserve-button" (click)="abrirModalReserva(service)">
+                       <span>RESERVA</span>
+                         <span>✔</span>
                       </button>
                   </td>
               </tr>
@@ -40,3 +44,4 @@
       </table>
   </div>
 </div>
+</body>

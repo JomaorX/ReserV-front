@@ -1,5 +1,8 @@
+<body>
+     <app-sidebar></app-sidebar>
+
 <div class="service-container">
-  <app-sidebar></app-sidebar>
+ 
 
   <h1 class="title">Gestión de Servicios</h1>
 
@@ -41,7 +44,8 @@
       </div>
 
       <button type="submit" [disabled]="serviceForm.invalid" class="submit-btn">
-          Agregar Servicio
+         <span>Agregar Servicio</span>
+          <span>✔</span>
       </button>
   </form>
 
@@ -55,10 +59,12 @@
               <p><strong>Descripción:</strong> {{ service.description }}</p>
               <p><strong>Precio:</strong> {{ service.price }} €</p>
               <p><strong>Duración:</strong> {{ service.duration }} minutos</p>
-              <button (click)="deleteService(service.id)" class="delete-btn">
-                  Eliminar
+              <button (click)="deleteService(service.id)" class="submit-btn">
+                   <span>Eliminar</span>
+                    <span>✔</span>
               </button>
           </div>
       }
   </div>
 </div>
+</body>

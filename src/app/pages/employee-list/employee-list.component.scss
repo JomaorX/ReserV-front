@@ -1,69 +1,186 @@
 /* Contenedor principal */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url('/background.png'); /* cambia la ruta por la tuya */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: rgb(253, 253, 253);
+}
+
 .container {
-    max-width: 600px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+  color: white;
 }
 
-/* Sección del formulario */
-.form-container,
-.list-container {
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Campos de entrada */
-.input-field {
-    width: 100%;
-    padding: 0.6rem;
-    border-radius: 0.5rem;
-    border: 1px solid #555;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-/* Botón de envío */
-.submit-btn {
-    width: 100%;
-    padding: 0.8rem;
-    background: #6200ea;
-    color: white;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    transition: 0.3s;
-}
-
-.submit-btn:hover {
-    background: #4500b5;
+/* Formulario */
+.form-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
 }
 
 /* Lista de empleados */
-.employee-card {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 0.5rem;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+.list-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
 }
 
-/* Botón de eliminación */
+/* Inputs y selects */
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgb(1, 1, 1);
+  font-size: 1rem;
+  transition: border 0.3s, background 0.3s;
+}
+
+.input-field:focus {
+  border-color: #8a2be2;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Botón de enviar */
+.submit-btn {
+  background: #8a2be2;
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  background: #5e1fb8;
+}
+
+/* Mensaje de error */
+.error-text {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+/* Tarjetas de empleados */
+.employee-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.employee-card:hover {
+  transform: scale(1.02);
+}
+
+/* Botón de eliminar */
 .delete-btn {
-    padding: 0.5rem 1rem;
-    background: #b50000;
-    color: white;
-    border-radius: 0.5rem;
+  margin-top: 1rem;
+  background: #ff4d4d;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 .delete-btn:hover {
-    background: #880000;
+  background: #d93636;
+}
+.cool-button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #18181a;
+  color: #18181a;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 15px;
+  padding: 18px 18px 17px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #fff;
+  user-select: none;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100%; /* ✅ full width */
+  text-align: center;
 }
 
-/* Estilos de errores */
-.error-text {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 0.3rem;
+.cool-button span:first-child {
+  position: relative;
+  transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 10;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.cool-button span:last-child {
+  color: white;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 100;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translateY(225%) translateX(-50%);
+  height: 14px;
+  line-height: 13px;
+}
+
+.cool-button::after {
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transform-origin: bottom center;
+  transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  transform: skewY(9.3deg) scaleY(0);
+  z-index: 50;
+  border-radius: 18px;
+}
+
+.cool-button:hover::after {
+  transform: skewY(9.3deg) scaleY(2);
+}
+
+.cool-button:hover span:last-child {
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 1;
+  transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
 }

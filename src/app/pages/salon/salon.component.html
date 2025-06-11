@@ -1,52 +1,47 @@
-<body>
+<body>    <app-sidebar></app-sidebar>
   <div class="salon-container">
-      <app-sidebar></app-sidebar>
-  
-      <!-- Banner con nombre encima -->
-      <div class="banner-wrapper">
-          <img [src]="bannerPreview" alt="Banner preview" class="banner-img" />
-          <h1 class="salon-name">{{ salonForm.get('name')?.value || 'Nombre del Salón' }}</h1>
-      </div>
-  
-      <!-- Formulario -->
-      <form [formGroup]="salonForm" (ngSubmit)="saveSalon()" enctype="multipart/form-data" class="salon-form">
-          <div class="form-columns">
-              <!-- Columna izquierda -->
-              <div class="form-left">
-                  <div class="form-group">
-                      <label for="banner">Cambiar Banner:</label>
-                      <input type="file" id="banner" (change)="onBannerSelected($event)" />
-                  </div>
-  
-                  <div class="form-group">
-                      <label for="name">Nombre:</label>
-                      <input id="name" formControlName="name" type="text" placeholder="Nombre"/>
-                  </div>
-  
-                  <div class="form-group">
-                      <label for="openingHours">Horario:</label>
-                      <input id="openingHours" formControlName="openingHours" type="text" placeholder="Horario"/>
-                  </div>
-              </div>
-  
-              <!-- Columna derecha -->
-              <div class="form-right">
-                  <div class="form-group">
-                      <label for="location">Ubicación:</label>
-                      <input id="location" formControlName="location" type="text" placeholder="Coordenadas" />
-                  </div>
-  
-                  <div class="map-container">
-                      <div id="map" class="leaflet-map"></div>
-                      <img src="assets/marker-icon.png" class="map-marker-center" alt="marker" />
-                  </div>
-              </div>
+
+
+    <!-- Banner con nombre encima -->
+    <div class="banner-wrapper">
+      <img [src]="bannerPreview" alt="Banner preview" class="banner-img" />
+      <h1 class="salon-name">{{ salonForm.get('name')?.value || 'Nombre del Salón' }}</h1>
+    </div>
+
+    <!-- Formulario -->
+    <form [formGroup]="salonForm" (ngSubmit)="saveSalon()" enctype="multipart/form-data" class="salon-form">
+      <div class="form-columns">
+        <!-- Columna izquierda -->
+        <div class="form-left">
+          <div class="form-group">
+            <label for="banner">Cambiar Banner:</label>
+            <input type="file" id="banner" (change)="onBannerSelected($event)" />
           </div>
-  
-          <button type="submit" [disabled]="salonForm.invalid" class="submit-btn">
-              Guardar
-          </button>
-      </form>
+
+          <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input id="name" formControlName="name" type="text" placeholder="Nombre" />
+          </div>
+
+          <div class="form-group">
+            <label for="openingHours">Horario:</label>
+            <input id="openingHours" formControlName="openingHours" type="text" placeholder="Horario" />
+          </div>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="form-right">
+          <div class="form-group">
+            <label for="location">Ubicación:</label>
+            <input id="location" formControlName="location" type="text" placeholder="Coordenadas" />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="salonForm.invalid" class="cool-button">
+         <span>Guardar</span>
+         <span>✔</span>
+      </button>
+    </form>
   </div>
-  </body>
-  
+</body>

@@ -1,12 +1,30 @@
-/* Contenedor del salón */
+/* Contenedor principal del salón */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/fnd2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  overflow-x: hidden;
+}
+
 .salon-container {
-  max-width: 900px;
-  margin: auto;
+  max-width: 960px;
+  margin: 4rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 /* Tarjeta del salón */
@@ -14,10 +32,11 @@
   width: 100%;
   max-width: 600px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
 }
 
 /* Banner */
@@ -28,64 +47,119 @@
   border-radius: 1rem;
 }
 
-/* Información del salón */
+/* Info del salón */
 .salon-name {
   font-size: 2rem;
   font-weight: bold;
   color: white;
   margin-top: 1rem;
+  text-shadow: 1px 1px 3px black;
 }
 
 .salon-location,
 .salon-hours {
   font-size: 1rem;
-  color: #ccc;
+  color: #cccccc;
+  margin: 0.3rem 0;
 }
 
-/* Contenedor de la tabla */
+/* Contenedor tabla */
 .table-container {
   width: 100%;
   overflow-x: auto;
+  margin-top: 1rem;
 }
 
 /* Tabla de servicios */
 .services-table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 1rem;
+  overflow: hidden;
 }
 
 .services-table th,
 .services-table td {
   padding: 1rem;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
 }
 
 .services-table th {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
+  font-weight: bold;
 }
 
 .services-table tbody tr:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Botón de reserva */
+/* Botón animado de reserva */
 .reserve-button {
-  padding: 0.5rem 1rem;
-  background: #0057d9;
-  color: white;
-  border-radius: 0.5rem;
-  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #18181a;
+  color: #18181a;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 15px;
+  padding: 18px 18px 17px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #ffffff;
+  user-select: none;
+  font-weight: bold;
+  border-radius: 18px;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
 }
 
-.reserve-button:hover {
-  background: #0040a3;
+.reserve-button span:first-child {
+  position: relative;
+  z-index: 10;
+  transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
 }
 
-/* Responsividad */
+.reserve-button span:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 225%);
+  opacity: 0;
+  color: rgb(255, 255, 255);
+  z-index: 100;
+  transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
+}
+
+.reserve-button::after {
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transform-origin: bottom center;
+  transform: skewY(9.3deg) scaleY(0);
+  transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 50;
+  border-radius: 18px;
+}
+
+.reserve-button:hover::after {
+  transform: skewY(9.3deg) scaleY(2);
+}
+.reserve-button:hover span:last-child {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .salon-card {
     max-width: 90%;
@@ -94,5 +168,10 @@
   .services-table th,
   .services-table td {
     padding: 0.8rem;
+  }
+
+  .reserve-button {
+    padding: 14px;
+    font-size: 14px;
   }
 }

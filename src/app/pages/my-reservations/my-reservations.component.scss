@@ -1,96 +1,137 @@
 /* Contenedor principal */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.6), 
+      rgba(0, 0, 0, 0.6)
+    ),
+    url('/fnd2.png'); /* cambia la ruta si hace falta */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  overflow-x: hidden;
+}
+
 .container {
-    max-width: 900px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2rem;
+  margin-left: 100px; /* espacio por el sidebar */
+  padding: 2rem;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 /* Sección de citas */
 .appointments-container {
-    width: 100%;
-    padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 960px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
 }
 
 /* Lista de reservas */
 .reservations-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-/* Tarjetas de cita */
+/* Tarjeta individual de reserva */
 .reservation-card {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 0.5rem;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease;
 }
 
 .reservation-card:hover {
-    transform: scale(1.03);
+  transform: translateY(-3px);
 }
 
-/* Grupo de botones */
+.reservation-card p {
+  margin: 0.5rem 0;
+  color: #eaeaea;
+}
+
+/* Botones de acción */
 .buttons-group {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-/* Botón Modificar */
+.update-btn,
+.delete-btn {
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Botón Modificar con animación tipo glass */
 .update-btn {
-    padding: 0.5rem 1rem;
-    background: #0057d9;
-    color: white;
-    border-radius: 0.5rem;
-    transition: background 0.3s;
+  background: #ffffff;
+  color: #18181a;
+  border: 1px solid #18181a;
+  position: relative;
+  overflow: hidden;
+}
+
+.update-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transform-origin: bottom center;
+  transform: skewY(9.3deg) scaleY(0);
+  transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 0;
+  border-radius: 8px;
+}
+
+.update-btn:hover::after {
+  transform: skewY(9.3deg) scaleY(2);
 }
 
 .update-btn:hover {
-    background: #0040a3;
+  color: white;
+  z-index: 1;
 }
 
-/* Botón Cancelar */
+.update-btn span {
+  position: relative;
+  z-index: 10;
+}
+
+/* Botón Cancelar estilo peligro */
 .delete-btn {
-    padding: 0.5rem 1rem;
-    background: #b50000;
-    color: white;
-    border-radius: 0.5rem;
-    transition: background 0.3s;
+  background: #f87171;
+  color: white;
+  border: 1px solid #dc2626;
 }
 
 .delete-btn:hover {
-    background: #880000;
+  background: #dc2626;
 }
 
-/* Texto sin citas */
+/* Texto cuando no hay citas */
 .no-appointments-text {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #ccc;
-    margin-top: 1rem;
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-    .container {
-        max-width: 90%;
-    }
-
-    .reservation-card {
-        padding: 0.8rem;
-    }
-
-    .buttons-group {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+  text-align: center;
+  color: #ddd;
+  font-style: italic;
+  margin-top: 2rem;
 }

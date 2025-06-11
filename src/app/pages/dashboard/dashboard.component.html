@@ -8,29 +8,30 @@
 
       <div *ngIf="userData; else notAuth">
         <div class="user-info">
+          <!-- Aquí podrías meter info del usuario -->
         </div>
       </div>
 
       <ng-template #notAuth>
         <p class="error-text">No estás autenticado. Redirigiendo al inicio de sesión...</p>
       </ng-template>
-    </div>
-  </div>
 
-  <!-- Tarjetas de Peluquerías -->
-  <div class="salones-grid">
-    <div class="peluqueria-card" *ngFor="let salon of salones">
-      <img [src]="salon.bannerUrl || '/assets/default-banner.jpg'" alt="Banner del salón" class="peluqueria-banner" />
-      
-      <div class="peluqueria-info">
-        <h2 class="peluqueria-nombre">{{ salon.name }}</h2>
-        <p class="horario">🕓 Abierto desde: {{ salon.openingHours }}</p>
-        <a [routerLink]="['/salon', salon.id]">
-          <button>
-            <span>Solicitar Cita</span>
-            <span>Reservar</span>
-          </button>
-        </a>
+      <!-- Tarjetas de Peluquerías -->
+      <div class="salones-grid">
+        <div class="peluqueria-card" *ngFor="let salon of salones">
+          <img [src]="salon.bannerUrl || '/assets/default-banner.jpg'" alt="Banner del salón" class="peluqueria-banner" />
+          
+          <div class="peluqueria-info">
+            <h2 class="peluqueria-nombre">{{ salon.name }}</h2>
+            <p class="horario">🕓 Abierto desde: {{ salon.openingHours }}</p>
+            <a [routerLink]="['/salon', salon.id]">
+              <button>
+                <span>Solicitar Cita</span>
+                <span>Reservar</span>
+              </button>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

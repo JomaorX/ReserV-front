@@ -1,45 +1,52 @@
-<div class="unavailable-container">
+<body>
   <app-sidebar></app-sidebar>
 
-  <h1 class="title">Gestión de Días No Disponibles</h1>
+  <div class="unavailable-container">
+    <h1 class="title">Gestión de Días No Disponibles</h1>
 
-  <!-- Formulario -->
-  <form [formGroup]="unavailableForm" (ngSubmit)="addUnavailableDay()" class="unavailable-form">
+    <!-- Formulario -->
+    <form [formGroup]="unavailableForm" (ngSubmit)="addUnavailableDay()" class="unavailable-form">
       <div class="form-group">
-          <label for="date">Fecha:</label>
-          <input id="date" formControlName="date" type="date" />
-          @if (unavailableForm.get('date')?.invalid && (unavailableForm.get('date')?.touched || unavailableForm.get('date')?.dirty)) {
-              <p class="error-text">La fecha es obligatoria.</p>
-          }
+        <label for="date">Fecha:</label>
+        <input id="date" formControlName="date" type="date" />
+        @if (unavailableForm.get('date')?.invalid && (unavailableForm.get('date')?.touched || unavailableForm.get('date')?.dirty)) {
+          <p class="error-text">La fecha es obligatoria.</p>
+        }
       </div>
 
       <div class="form-group">
-          <label for="reason">Motivo:</label>
-          <input id="reason" formControlName="reason" type="text" />
-          @if (unavailableForm.get('reason')?.invalid && (unavailableForm.get('reason')?.touched || unavailableForm.get('reason')?.dirty)) {
-              <p class="error-text">El motivo es obligatorio.</p>
-          }
+        <label for="reason">Motivo:</label>
+        <input id="reason" formControlName="reason" type="text" />
+        @if (unavailableForm.get('reason')?.invalid && (unavailableForm.get('reason')?.touched || unavailableForm.get('reason')?.dirty)) {
+          <p class="error-text">El motivo es obligatorio.</p>
+        }
       </div>
 
-      <button type="submit" [disabled]="unavailableForm.invalid" class="submit-btn">
-          Agregar Día No Disponible
+      <!-- ✅ Botón bueno con animación -->
+      <button type="submit" [disabled]="unavailableForm.invalid" class="cool-button">
+        <span>Agregar Día No Disponible</span>
+        <span>✔</span>
       </button>
-  </form>
+    </form>
 
-  <h2 class="list-title">Lista de Días No Disponibles</h2>
+    <h2 class="list-title">Lista de Días No Disponibles</h2>
 
-  <!-- Lista de días no disponibles -->
-  <div class="unavailable-list">
+    <!-- Lista de días no disponibles -->
+    <div class="unavailable-list">
       @for (day of unavailableDays; track day) {
-          <div class="unavailable-item">
-              <div>
-                  <p><strong>Fecha:</strong> {{ day.date }}</p>
-                  <p><strong>Motivo:</strong> {{ day.reason }}</p>
-              </div>
-              <button (click)="deleteUnavailableDay(day.id)" class="delete-btn">
-                  Eliminar
-              </button>
+        <div class="unavailable-item">
+          <div>
+            <p><strong>Fecha:</strong> {{ day.date }}</p>
+            <p><strong>Motivo:</strong> {{ day.reason }}</p>
           </div>
+
+          <!-- ✅ Este es el botón para eliminar -->
+          <button (click)="deleteUnavailableDay(day.id)" class="delete-btn">
+            <span>Eliminar</span>
+            <span>🗑️</span>
+          </button>
+        </div>
       }
+    </div>
   </div>
-</div>
+</body>

@@ -1,18 +1,92 @@
 .reservation-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.full-width {
-    width: 100%;
+.reservation-form ::ng-deep .mat-form-field {
+  width: 100%;
+  color: white;
+}
+
+.reservation-form ::ng-deep .mat-form-field-label {
+  color: #ccc !important;
+}
+
+.reservation-form ::ng-deep .mat-input-element {
+  color: white !important;
+}
+
+.reservation-form ::ng-deep .mat-form-field-underline {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Botones */
+.actions button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.actions button[color="primary"] {
+  background-color: #ffffff;
+  color: #18181a;
+  border: 1px solid #18181a;
+  position: relative;
+  overflow: hidden;
+}
+
+.actions button[color="primary"]::after {
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transform-origin: bottom center;
+  transform: skewY(9.3deg) scaleY(0);
+  transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 0;
+  border-radius: 8px;
+}
+
+.actions button[color="primary"]:hover::after {
+  transform: skewY(9.3deg) scaleY(2);
+}
+
+.actions button[color="primary"]:hover {
+  color: white;
+  z-index: 1;
+}
+
+.actions button[color="primary"] span {
+  position: relative;
+  z-index: 10;
+}
+
+.actions button[type="button"] {
+  background-color: transparent;
+  border: 1px solid #ffffff40;
+  color: #fff;
+}
+.actions button[type="button"]:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }

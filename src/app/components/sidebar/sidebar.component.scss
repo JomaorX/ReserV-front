@@ -1,69 +1,87 @@
+/* Menú lateral */
 .menu {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 85px;
-    transition: width 0.3s ease;
-    overflow: hidden auto;
-    background: #131212ce;
-    padding: 20px 20px 20px 0;
-    backdrop-filter: blur(5px);
-    box-shadow: 8px 0 9px 0 #00000014;
-    border-radius: 0 25px 25px 0;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 85px;
+  transition: width 0.3s ease;
+  overflow: hidden auto;
+  background: #131212ce;
+  padding: 20px 20px 20px 0;
+  backdrop-filter: blur(5px);
+  box-shadow: 8px 0 9px 0 #00000014;
+  border-radius: 0 25px 25px 0;
 }
 
 .menu:hover {
-    width: 260px;
+  width: 260px;
 }
 
 .menu-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
 }
 
 .menu-content li {
-    list-style: none;
-    border-radius: 0 50px 50px 0;
-    margin-bottom: 20px;
-    width: 100%;
-    transition: background 0.3s;
+  list-style: none;
+  border-radius: 0 50px 50px 0;
+  margin-bottom: 20px;
+  width: 100%;
+  transition: background 0.3s;
 }
 
 .menu-content li:hover {
-    background: #0c0c0c;
+  background: #0c0c0c;
 }
 
 .menu-link,
 .menu-button {
-    all: unset;
-    display: flex;
-    align-items: center;
-    color: rgb(213, 213, 213);
-    font-size: 1rem;
-    font-weight: 500;
-    width: 100%;
-    padding: 0.75rem 1.5rem 0.75rem 20px;
-    gap: 1rem;
-    cursor: pointer;
+  all: unset;
+  display: flex;
+  align-items: center;
+  color: rgb(213, 213, 213);
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  padding: 0.75rem 1.5rem 0.75rem 20px;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+/* Oculta el texto cuando el menú no está expandido */
+.menu:not(:hover) .menu-link span:last-child,
+.menu:not(:hover) .menu-button span:last-child {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* Muestra el texto cuando el menú está expandido */
+.menu:hover .menu-link span:last-child,
+.menu:hover .menu-button span:last-child {
+  opacity: 1;
+  width: auto;
+  transition: all 0.3s ease;
 }
 
 .material-symbols-outlined {
-    font-size: 24px;
-    padding: 10px;
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: 24px;
+  padding: 10px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
 /* Estilo específico para "Mis Reservas" */
 .menu-link[routerLink="/my-reservations"] {
-    color: #ffd700;
-    /* Amarillo dorado */
+  color: #ffd700;
 }
 
 .menu-link:hover,
 .menu-button:hover {
-    background: #0c0c0c;
+  background: #0c0c0c;
 }
