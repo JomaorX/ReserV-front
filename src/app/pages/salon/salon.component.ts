@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notificacion.service';
 import { SalonService } from '../../services/salon.service';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-salon',
@@ -29,7 +30,8 @@ export class SalonComponent implements OnInit {
   constructor(
     private salonService: SalonService,
     private http: HttpClient,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) {
     this.salonForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -44,11 +46,14 @@ export class SalonComponent implements OnInit {
   }
 
   loadSalon(): void {
-    this.salonService.getMySalon().subscribe({
+    const userData: any = this.authService.getUserData(); // Obtener el ID del salón desde el token
+    const salonId = userData.salonId;
+    this.salonService.getSalonById(+salonId).subscribe({
       next: (data) => {
-        this.salon = data;
-        this.salonForm.patchValue(data);
-        this.bannerPreview = data.bannerUrl || null;
+        console.log("Respuesta del salon",data);
+        this.salon = data[0]
+        this.salonForm.patchValue(this.salon);
+        this.bannerPreview = this.salon.bannerUrl || null;
         this.geocodeAddress(data.location);
       },
       error: (error) => {
@@ -92,14 +97,6 @@ export class SalonComponent implements OnInit {
       if (this.salon) {
         this.salonService.updateSalon(this.salon.id, data).subscribe({
           next: (res) => {
-            const newToken = res.token;
-            console.log("RESPUESTA",res);
-            if (newToken) {
-              const tokViejo = localStorage.getItem('token');
-              console.log('Token viejo', tokViejo);
-              const tokNuevo = localStorage.setItem('token', newToken); // ✅ Guardar el nuevo token con el salonId actualizado
-              console.log('Token nuevo', tokNuevo);
-            }
             this.notificationService.showSuccess(
               'Salón actualizado correctamente.'
             );
@@ -114,6 +111,14 @@ export class SalonComponent implements OnInit {
       } else {
         this.salonService.createSalon(data).subscribe({
           next: (res) => {
+            const newToken = res.token;
+            console.log('RESPUESTA', res);
+            if (newToken) {
+              const tokViejo = localStorage.getItem('token');
+              console.log('Token viejo', tokViejo);
+              const tokNuevo = localStorage.setItem('token', newToken); // ✅ Guardar el nuevo token con el salonId actualizado
+              console.log('Token nuevo', newToken);
+            }
             this.notificationService.showSuccess(
               'Salón registrado correctamente.'
             );

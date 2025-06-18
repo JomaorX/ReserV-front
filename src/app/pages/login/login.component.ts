@@ -16,6 +16,14 @@ export class LoginComponent {
   password: FormControl;
   errorMessage: string = ''; // Para mostrar mensajes de error del backend
 
+  imageUrls: string[] = [
+    'https://i.imgur.com/N93iEg1.png',
+    'https://i.imgur.com/iWBXFYY.png',
+    'https://i.imgur.com/9EhANFx.png',
+    'https://i.imgur.com/VHcsFof.png',
+    'https://i.imgur.com/uXGm5yE.png',
+  ];
+
   constructor(
     private authService: AuthService,
     private router: Router,

@@ -1,7 +1,9 @@
 <!-- Loader Global (SIEMPRE visible al cambiar de ruta) -->
-<div *ngIf="loading" class="loader-wrapper">
-  <div class="spinner"></div>
-</div>
+@if (loading) {
+  <div class="loader-wrapper">
+    <div class="spinner"></div>
+  </div>
+}
 
 <!-- Contenido de las rutas -->
 <router-outlet></router-outlet>

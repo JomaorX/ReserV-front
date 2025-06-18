@@ -1,47 +1,48 @@
-
 <body>
     <app-sidebar></app-sidebar>
     <div class="salon-container">
   
-
-  <!-- Información del Salón -->
-  <mat-card class="salon-card">
-      <img [src]="salon.bannerUrl || '/default-banner.jpg'" alt="Imagen del salón" class="salon-banner">
-      <mat-card-content>
+      <!-- Información del Salón -->
+      <mat-card class="salon-card">
+        <img [src]="salon.bannerUrl || '/default-banner.jpg'" alt="Imagen del salón" class="salon-banner">
+        <mat-card-content>
           <h1 class="salon-name">{{ salon.name }}</h1>
           <p class="salon-location">📍 {{ salon.location }}</p>
           <p class="salon-hours">🕓 Horario: {{ salon.openingHours }}</p>
-      </mat-card-content>
-  </mat-card>
-
-  <mat-divider></mat-divider>
-
-  <!-- Lista de Servicios en tabla -->
-  <h2 class="services-title">Servicios Disponibles</h2>
-  <div class="table-container">
-      <table class="services-table">
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-divider></mat-divider>
+  
+      <!-- Lista de Servicios en tabla -->
+      <h2 class="services-title">Servicios Disponibles</h2>
+      <div class="table-container">
+        <table class="services-table">
           <thead>
-              <tr>
-                  <th>Servicio</th>
-                  <th>Precio</th>
-                  <th>Duración</th>
-                  <th></th>
-              </tr>
+            <tr>
+              <th>Servicio</th>
+              <th>Precio</th>
+              <th>Duración</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let service of services">
-                  <td>{{ service.name }}</td>
-                  <td>{{ service.price | currency:'EUR' }}</td>
-                  <td>{{ service.duration }} min</td>
-                  <td>
-                      <button class="reserve-button" (click)="abrirModalReserva(service)">
-                       <span>RESERVA</span>
-                         <span>✔</span>
-                      </button>
-                  </td>
+            @for (service of services; track service.id) {
+              <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.price | currency:'EUR' }}</td>
+                <td>{{ service.duration }} min</td>
+                <td>
+                  <button class="reserve-button" (click)="abrirModalReserva(service)">
+                    <span>RESERVA</span>
+                    <span>✔</span>
+                  </button>
+                </td>
               </tr>
+            }
           </tbody>
-      </table>
-  </div>
-</div>
-</body>
+        </table>
+      </div>
+    </div>
+  </body>
+  

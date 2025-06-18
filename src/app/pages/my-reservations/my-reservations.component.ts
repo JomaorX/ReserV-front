@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../../services/reservation.service';
-import { CommonModule } from '@angular/common'; // 💡 Aquí está el *ngIf
+import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../services/notificacion.service';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 
