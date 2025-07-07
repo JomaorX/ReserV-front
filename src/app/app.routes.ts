@@ -23,47 +23,38 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [authGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'my-reservations',
     component: MyReservationsComponent,
-    canActivate: [authGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'reservations',
     component: ReservationsComponent,
-    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
-    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'employees',
     component: EmployeeListComponent,
-    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'unvailable-days',
     component: UnavailableDaysComponent,
-    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'services',
     component: ServicesComponent,
-    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'salon',
     component: SalonComponent,
-    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'salon/:id',
     component: SalonDetailComponent,
-    canActivate: [authGuard],
   },
 ];
 
