@@ -1,0 +1,137 @@
+/* Contenedor principal */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)),
+        url('/fnd2.png');
+    /* cambia la ruta si hace falta */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    overflow-x: hidden;
+}
+
+.container {
+    margin-left: 100px;
+    /* espacio por el sidebar */
+    padding: 2rem;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Sección de citas */
+.appointments-container {
+    max-width: 960px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+/* Lista de reservas */
+.reservations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Tarjeta individual de reserva */
+.reservation-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s ease;
+}
+
+.reservation-card:hover {
+    transform: translateY(-3px);
+}
+
+.reservation-card p {
+    margin: 0.5rem 0;
+    color: #eaeaea;
+}
+
+/* Botones de acción */
+.buttons-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.update-btn,
+.delete-btn {
+    padding: 0.6rem 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Botón Modificar con animación tipo glass */
+.update-btn {
+    background: #ffffff;
+    color: #18181a;
+    border: 1px solid #18181a;
+    position: relative;
+    overflow: hidden;
+}
+
+.update-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    transform-origin: bottom center;
+    transform: skewY(9.3deg) scaleY(0);
+    transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+    z-index: 0;
+    border-radius: 8px;
+}
+
+.update-btn:hover::after {
+    transform: skewY(9.3deg) scaleY(2);
+}
+
+.update-btn:hover {
+    color: white;
+    z-index: 1;
+}
+
+.update-btn span {
+    position: relative;
+    z-index: 10;
+}
+
+/* Botón Cancelar estilo peligro */
+.delete-btn {
+    background: #f87171;
+    color: white;
+    border: 1px solid #dc2626;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+}
+
+/* Texto cuando no hay citas */
+.no-appointments-text {
+    text-align: center;
+    color: #ddd;
+    font-style: italic;
+    margin-top: 2rem;
+}

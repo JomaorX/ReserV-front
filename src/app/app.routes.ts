@@ -12,6 +12,7 @@ import { UnavailableDaysComponent } from './pages/unvailable-days/unvailable-day
 import { ServicesComponent } from './pages/services/services.component';
 import { SalonComponent } from './pages/salon/salon.component';
 import { SalonDetailComponent } from './pages/salon-detail/salon-detail.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
 
 
 
@@ -28,6 +29,11 @@ export const routes: Routes = [
     path: 'my-reservations',
     component: MyReservationsComponent,
     canActivate: [authGuard], // Proteger la ruta con AuthGuard
+  },
+  {
+    path: 'reservations',
+    component: ReservationsComponent,
+    canActivate: [adminGuard], // Proteger la ruta con AuthGuard
   },
   {
     path: 'admin-dashboard',
