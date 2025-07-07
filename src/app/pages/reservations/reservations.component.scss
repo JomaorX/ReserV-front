@@ -1,20 +1,16 @@
-/* Contenedor principal */
+/* Fondo general */
 body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
     font-family: 'Segoe UI', sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6),
-            rgba(0, 0, 0, 0.6)),
-        url('/fnd2.png');
-    /* cambia la ruta si hace falta */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: white;
-    overflow-x: hidden;
-}
+    overflow-x: hidden; }
 
 .container {
     margin-left: 100px;
