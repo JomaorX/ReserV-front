@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SalonService {
-  private apiUrl = 'http://localhost:3000/api/salons'; // URL del backend
+  private apiUrl = environment.apiUrl+'/api/salons'; // URL del backend
   private headers: HttpHeaders; // Configura el encabezado Authorization con el token
 
   constructor(private http: HttpClient, private authService: AuthService) {

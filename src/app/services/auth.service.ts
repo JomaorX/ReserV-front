@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { jwtDecode, JwtPayload } from 'jwt-decode'; // Importa jwtDecode y JwtPayload
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api'; // URL del backend
+  private apiUrl = environment.apiUrl+'/api';
 
   constructor(private http: HttpClient, private router: Router) {}
 

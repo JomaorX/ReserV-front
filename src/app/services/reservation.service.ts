@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
-  private apiUrl = 'http://localhost:3000/api/reservations'; // URL del backend
+  private apiUrl = environment.apiUrl+'/api/reservations'; // URL del backend
   private headers: HttpHeaders; // Configura el encabezado Authorization con el token
 
   constructor(private http: HttpClient, private authService: AuthService) {
