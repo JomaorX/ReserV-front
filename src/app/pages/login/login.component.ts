@@ -48,11 +48,11 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe({
         next: (response: any) => {
           // Guardar el token en localStorage
-          localStorage.setItem('Tu token', response.token);
+          localStorage.setItem('token', response.token);
 
           // Obtener datos del usuario desde el token
           const userData: any = this.authService.getUserData();
-
+          console.log('Tus datos de token son:', userData);
           // Redirigir según el rol
           if (userData && userData.role === 'admin') {
             this.notificationService.showSuccess('Bienvenido, administrador');
