@@ -56,7 +56,7 @@ export class SalonComponent implements OnInit {
         console.log("Respuesta del salon",data);
         this.salon = data[0]
         this.salonForm.patchValue(this.salon);
-        this.bannerPreview = this.apiUrl+this.salon.bannerUrl || null;
+        this.bannerPreview = this.salon.bannerUrl || null;
         this.geocodeAddress(data.location);
       },
       error: (error) => {
