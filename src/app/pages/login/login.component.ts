@@ -48,7 +48,7 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe({
         next: (response: any) => {
           // Guardar el token en localStorage
-          localStorage.setItem('token', response.token);
+          localStorage.setItem('Tu token', response.token);
 
           // Obtener datos del usuario desde el token
           const userData: any = this.authService.getUserData();

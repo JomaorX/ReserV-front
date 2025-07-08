@@ -96,6 +96,8 @@ export class SalonComponent implements OnInit {
   saveSalon(): void {
     if (this.salonForm.valid) {
       const data = this.salonForm.value;
+      console.log('Datos que se van al backend:', data);
+
 
       if (this.salon) {
         this.salonService.updateSalon(this.salon.id, data).subscribe({
