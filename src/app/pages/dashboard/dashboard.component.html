@@ -18,7 +18,7 @@
       <div class="salones-grid">
         @for (salon of salones; track salon.id) {
           <div class="peluqueria-card">
-            <img [src]="salon.bannerUrl || '/assets/default-banner.jpg'" alt="Banner del salón" class="peluqueria-banner" />
+            <img [src]="apiUrl+salon.bannerUrl || 'default-banner.jpg'" alt="Banner del salón" class="peluqueria-banner" />
             
             <div class="peluqueria-info">
               <h2 class="peluqueria-nombre">{{ salon.name }}</h2>

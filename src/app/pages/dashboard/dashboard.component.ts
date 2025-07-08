@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalonService } from '../../services/salon.service';
 import { Salon } from '../../interfaces/salon';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component"; // Asegúrate de tener esta interfaz creada
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +22,8 @@ import { SidebarComponent } from "../../components/sidebar/sidebar.component"; /
 export class DashboardComponent implements OnInit {
   userData: any = null;
   salones: Salon[] = [];
+
+  public apiUrl = environment.apiUrl;
 
   constructor(private salonService: SalonService) {}
 
