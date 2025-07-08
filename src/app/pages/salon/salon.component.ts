@@ -12,6 +12,7 @@ import { NotificationService } from '../../services/notificacion.service';
 import { SalonService } from '../../services/salon.service';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
 import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-salon',
@@ -26,6 +27,8 @@ export class SalonComponent implements OnInit {
   bannerPreview: string | null = null;
   map: any;
   mapVisible = false;
+
+  private apiUrl = environment.apiUrl+'/api';
 
   constructor(
     private salonService: SalonService,
@@ -71,7 +74,7 @@ export class SalonComponent implements OnInit {
 
       this.http
         .post<{ imageUrl: string }>(
-          'http://localhost:3000/api/upload-image',
+          this.apiUrl+'/upload-image',
           formData
         )
         .subscribe({
