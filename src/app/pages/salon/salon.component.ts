@@ -28,7 +28,7 @@ export class SalonComponent implements OnInit {
   map: any;
   mapVisible = false;
 
-  private apiUrl = environment.apiUrl+'/api';
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private salonService: SalonService,
@@ -74,7 +74,7 @@ export class SalonComponent implements OnInit {
 
       this.http
         .post<{ imageUrl: string }>(
-          this.apiUrl+'/upload-image',
+          this.apiUrl+'/api/upload-image',
           formData
         )
         .subscribe({

@@ -4,7 +4,7 @@
   
       <!-- Información del Salón -->
       <mat-card class="salon-card">
-        <img [src]="salon.bannerUrl || '/default-banner.jpg'" alt="Imagen del salón" class="salon-banner">
+        <img [src]="apiUrl+salon.bannerUrl || '/default-banner.jpg'" alt="Imagen del salón" class="salon-banner">
         <mat-card-content>
           <h1 class="salon-name">{{ salon.name }}</h1>
           <p class="salon-location">📍 {{ salon.location }}</p>

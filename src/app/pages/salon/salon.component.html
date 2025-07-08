@@ -4,7 +4,7 @@
 
     <!-- Banner con nombre encima -->
     <div class="banner-wrapper">
-      <img [src]="bannerPreview" alt="Banner preview" class="banner-img" />
+      <img [src]="apiUrl+bannerPreview" alt="Banner preview" class="banner-img" />
       <h1 class="salon-name">{{ salonForm.get('name')?.value || 'Nombre del Salón' }}</h1>
     </div>
 

@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ReservationModalComponent } from './reservation-modal/reservation-modal.component';
 import { SalonService } from '../../services/salon.service';
 import { SidebarComponent } from "../../components/sidebar/sidebar.component";
+import { environment } from '../../../environments/environment';
 
 
 
@@ -38,6 +39,8 @@ export class SalonDetailComponent implements OnInit {
   salon: any = null;
   services: any[] = [];
   modalAbierto: boolean = false;
+
+  public apiUrl = environment.apiUrl;
 
   constructor(
     private route: ActivatedRoute,
